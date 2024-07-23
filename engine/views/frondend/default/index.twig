@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="es-PE">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>{{internas.extra_internas['meta_titulo']}}</title>
+    <meta name="description" content="{{internas.extra_internas['meta_descripcion']}}" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="{{internas.extra_internas['meta_titulo']}}" />
+    <meta property="og:site_name" content="{{config.facebook_site_name}}" />
+    <meta property="og:image" content="{{config.facebook_banner}}" />
+    <meta property="og:image:secure_url" content="{{config.facebook_banner}}" />
+    <meta property="og:locale" content="{{config.facebook_locale}}" />
+    <meta property="og:description" content="{{internas.extra_internas['meta_descripcion']}}" />
+    <meta property="og:url" content="{{request}}">
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="{{internas.extra_internas['meta_titulo']}}" />
+    <meta name="twitter:description" content="{{internas.extra_internas['meta_descripcion']}}" />
+    <meta name="twitter:image" content="{{config.facebook_banner}}" />
+    <meta name="twitter:domain" content="{{request}}">
+    {% include(recursos ~ '/recursos/recursos.twig') %}
+</head>
+
+<body>
+    {% include(recursos ~ '/recursos/header.twig') %}
+    <main>
+        {% set banners = slider.data() %}
+        {% if banners | length > 0 %}
+        <section id="portada" class="d-md-block">
+            <div id="carouselJovita" class="carousel slide" data-ride="carousel">
+                <ol class="carousel-indicators">
+                    {% for key, item in banners %}
+                    {% set active = '' %}
+                    {% if key == '0' %}
+                    {% set active = 'active' %}
+                    {% endif %}
+                    <li data-target="#myCarousel" data-slide-to="{{key}}" class="{{active}}"></li>
+                    {% endfor %}
+                </ol>
+                <div class="carousel-inner">
+                    {% for key, item in banners %}
+                    {% set active = '' %}
+                    {% if key == '0' %}
+                    {% set active = 'active' %}
+                    {% endif %}
+                    <div class="carousel-item {{active}}">
+                        <img src="{{item.photo}}" class="d-block w-100" alt="{{item.photo_name}}">
+                        <div class="carousel-caption container">
+                            <div class="row d-flex align-items-center" style="height: 100%;">
+                                <div class="col-lg-5">
+                                    <p><img src="{{theme}}/images/decor-1.png" alt="Shaddai">{{item.extra['description']}}</p>
+                                    <h2>{{item.extra['title']}}</h2>
+                                    <p><a href="{{item.extra['button']['url']}}" target="_self" class="btn btn-shaddai">{{item.extra['button']['text']}}</a></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                <a class="carousel-control-prev" href="#carouselJovita" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Anterior</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselJovita" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Siguente</span>
+                </a>
+            </div>
+        </section>
+        {% endif %}
+        {% set sec_Servicios = servicios_categorias.data() %}
+        {% if sec_Servicios | length > 0 %}
+        <section id="services" class="padding">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="title col-12">
+                        <p><img src="{{theme}}/images/decorL.png" alt="Shaddai"><span>Lo que hacemos</span><img src="{{theme}}/images/decorR.png" alt="Shaddai"></p>
+                        <h2>{{internas.extra_internas['home_servicios']}}</h2>
+                    </div>
+                    {% for key, item in sec_Servicios %}
+                    <div class="col-service col-md-4 col-sm-6 col-xs-12">
+                        <a href="{{url}}/servicios/categoria/{{item.seo}}">
+                            <div class="item">
+                                <div class="item-image d-flex align-items-center">
+                                    <img src="{{item.photo['portada']['file']}}" alt="{{item.name}}" class="img-fluid">
+                                </div>
+                                <div class="item-text">
+                                    <h2>{{item.name}}</h2>
+                                    <p>{{item.extra['texto']['descripcion_corta']}}</p>
+                                    <span><img src="{{item.photo['icono']['file']}}" alt="{{item.name}}"></span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+        {% else %}
+        {% endif %}
+        <section id="message" class="padding bg-img">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <h2>{{internas.extra_internas['home_mensaje'] | raw}}</h2>
+                        <a href="{{url}}/nuestra-firma" target="_self" class="btn btn-shaddai">Conócenos</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="choose" class="padding bg-img">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 col-xs-12"></div>
+                    <div class="col-md-6 col-sm-12 col-xs-12">
+                        <h2>¿Por qué escoger<br>nuestros servicios?</h2>
+                        {{internas.extra_internas['home_elegirnos'] | raw}}
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="testimonios" class="padding">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="title col-12">
+                        <p><img src="{{theme}}/images/decorL.png" alt="Shaddai"><span>Lo que dicen</span><img src="{{theme}}/images/decorR.png" alt="Shaddai"></p>
+                        <h2>{{internas.extra_internas['home_clientes']}}</h2>
+                    </div>
+                    {% set sec_testimonios = testimonios.data() %}
+                    {% if sec_testimonios | length > 0 %}
+                    <div class="col-md-8 col-xs-12 owl-testimonios owl-carousel owl-theme">
+                        {% for key, item in sec_testimonios %}
+                        <div class="item">
+                            <div class="autor-text">
+                                <div class="item-autor d-flex align-items-center">
+                                    <div class="item-autor-img">
+                                        <img src="{{item.photo['autor']['file']}}" alt="{{item.name}}">
+                                    </div>
+                                    <div class="item-autor-text">
+                                        <h2>{{item.name}}</h2>
+                                        <h3>{{item.extra['texto']['cargo'] | raw}}</h3>
+                                    </div>
+                                </div>
+                                <div class="item-comentario">
+                                    <p>{{item.extra['texto']['comentario'] | raw}}</p>
+                                    <p><i class="fas fa-quote-right"></i></p>
+                                </div>
+                            </div>
+                            <div class="item-comentario-img video-gallery">
+                                <a href="{{item.extra['texto']['link']}}" data-poster="{{item.photo['portada']['file']}}">
+                                    <img src="{{item.photo['portada']['file']}}" alt="{{item.name}}">
+                                    <div class="shadow-img"></div>
+                                    <img src="{{theme}}/images/play-button.png" class="play" alt="play">
+                                </a>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                    {% endif %}
+                    {% set sec_clientes = isesion.data() %}
+                    {% if sec_clientes | length > 0 %}
+                    <div class="col-md-8 col-xs-12 owl-clientes">
+                        {% for key, item in sec_clientes %}
+                        <a href="{{item.extra['link_web']}}" target="_blank"><img src="{{item.photo}}" alt="{{item.name}}"></a>
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                    {% endif %}
+                </div>
+            </div>
+        </section>
+        <section id="contact" class="padding bg-img">
+            <div class=" container">
+                <div class="row justify-content-center">
+                    <div id="contacto" class="col-info col-md-4 col-xs-12">
+                        <div class="title">
+                            <h2 class="text-left"><span>Contáctanos</span></h2>
+                        </div>
+                        <div class="correos">
+                            <p><i class="fal fa-envelope"></i>Correo</p>
+                            <ul>
+                                {% if config['email'][0] | trim != "" %}
+                                <li>{{config['email'][0]}}</li>
+                                {% endif %}
+                                {% if config['email'][1] | trim != "" %}
+                                <li>{{config['email'][1]}}</li>
+                                {% endif %}
+                            </ul>
+                        </div>
+                        <div class="telefonos">
+                            <p><i class="fal fa-phone"></i>Teléfonos</p>
+                            <ul>
+                                {% if config['telefono'][0] | trim != "" %}
+                                <li>Ofic. {{config['telefono'][0]}}</li>
+                                {% endif %}
+                                {% if config['telefono'][1] | trim != "" %}
+                                <li>Ofic. {{config['telefono'][1]}}</li>
+                                {% endif %}
+                            </ul>
+                        </div>
+                        <div class="direccion">
+                            <p><i class="fal fa-map-marker-alt"></i>Dirección</p>
+                            <ul>
+                                {% if config['direccion'] | trim != "" %}
+                                <li>{{config['direccion'] |raw }}</li>
+                                {% endif %}
+                                {% if config['direccion2'] | trim != "" %}
+                                <li>{{config['direccion2'] |raw }}</li>
+                                {% endif %}
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-8 col-xs-12 text-center">
+                        <form method="post" enctype="multipart/form-data">
+                            <div class="title">
+                                <h2>Solicitar <span>Cotización</span></h2>
+                            </div>
+                            <div class="form-row">
+                                <p class="text-center">{{internas.extra_internas['home_cotizacion'] | raw}}</p>
+                                <div class="form-group col-md-6">
+                                    <input type="text" class="form-control" id="name" name="name" placeholder="Nombre" required="">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <input type="text" class="form-control" id="company" name="company" placeholder="Empresa" required="">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <input type="text" class="form-control" id="phone" name="phone" placeholder="Teléfono" required="">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <input type="email" class="form-control" id="email" name="email" placeholder="Correo" required="">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <textarea class="form-control" id="message" name="message" placeholder="Mensaje" rows="10"></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-shaddai">Enviar Mensaje</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="map" class="padding"></section>
+    </main>
+    {% include(recursos ~ '/recursos/footer.twig') %}
+    {% include(recursos ~ '/recursos/javascript.twig') %}
+</body>
+
+</html>

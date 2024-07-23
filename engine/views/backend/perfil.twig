@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="es-PE">
+<head>
+	<meta charset="UTF-8">
+	<title>{{content.title}}  :: {{config.system}}</title>
+	{% include(admin ~ '/recursos/recursos.twig') %}
+</head>
+<body>
+	<div id="wrapper">
+		{% include(admin ~ '/recursos/silebar.twig') %}
+		<div id="page-wrapper" class="gray-bg">
+			{% include(admin ~ '/recursos/header.twig') %}
+			<div class="row wrapper border-bottom white-bg page-heading">
+				<div class="col-lg-8">
+					<h2>{{content.title}}</h2>
+				</div>
+				<div class="col-lg-4">
+				</div>
+			</div>
+			<div class="wrapper wrapper-content">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="ibox float-e-margins">
+							<div class="ibox-title">
+								<h5>{{content.title}}</h5>
+							</div>
+							<div class="ibox-content">
+								<form class="form-horizontal " enctype="multipart/form-data" method="post" parsley-validate novalidate>
+
+
+									<div class="form-group">
+										<div class="col-md-12">
+											<label class="form-label">Foto de Trabajador</label>
+											<span>(90x90px)</span>
+											<div id="view-img">
+												<span class="user_img_big" style="background-image:url({{user.file}})"></span>
+												<span id="sub_img" class="btn btn-default">
+													<span class="fa fa-picture-o "></span>
+													<span>Cambiar foto...</span>
+													<input type="file" id="previmage" name="fotos">
+												</span>
+												<span class="user_img_big prevdemo"></span>
+											</div>
+										</div>
+									</div>
+
+									<div class="form-group">
+										<div class="col-md-2 col-sm-3">
+											<label for="Username">Usuario</label>
+											<input type="text" readonly class="form-control" id="username" value="{{user.username}}">
+										</div>
+
+										<div class="col-md-5 col-sm-4">
+											<label for="Name">Nombres</label>
+											<input type="text" class="form-control" name="name" value="{{user.name}}" required>
+										</div>
+
+										<div class="col-md-5 col-sm-5">
+											<label for="FullName">Apellidos</label>
+											<input type="text" class="form-control" name="lastname" value="{{user.lastname}}" required>
+										</div>
+									</div>
+
+									<div class="form-group">
+
+
+										<div class="col-sm-3">
+											<label for="dni">Doc. de Identidad</label>
+											<input type="text" class="form-control" name="worker_dni" value="{{user.worker_dni}}" maxlength="8"  readonly  val-type="number" val-length="[8,8]" required>
+										</div>
+
+										<div class="col-sm-3">
+											<label for="Email">Email</label>
+											<input type="email" class="form-control" name="email" value="{{user.email}}" val-type="email" required>
+										</div>
+
+										<div class="col-sm-3">
+											<label for="Area">Area</label>
+											<input type="text" class="form-control" id="Area" value="{{user.name_area}}" readonly>
+										</div>
+
+										<div class="col-sm-3">
+											<label for="cellphone">Celular</label>
+											<input type="text" class="form-control" name="cellphone" value="{{user.cellphone}}" maxlength="9" val-type="number" val-length="[9,9]">
+										</div>
+
+									</div>
+
+									<div class="form-group">
+
+
+										<div class="col-sm-6">
+											<label for="Password">Contraseña</label>
+											<input type="password" class="form-control" name="password" id="pwd" placeholder="6 - 15 caracteres" val-equalto="#rpwd">
+										</div>
+
+										<div class="col-sm-6">
+											<label for="RePassword">Repetir Contraseña</label>
+											<input type="password" class="form-control" name="repassword" id="rpwd" placeholder="6 - 15 caracteres" val-equalto="#pwd">
+										</div>
+
+									</div>
+
+									<div class="form-group">
+
+										<div class="col-sm-6">
+											<label for="vehiculo">Vehículo, Marca, Placa</label>
+											<input type="text" class="form-control" name="vehiculo" value="{{user.vehiculo}}" maxlength="200">
+										</div>
+
+										<div class="col-sm-6">
+											<label for="placa">Lic. de Conducir N°</label>
+											<input type="text" class="form-control" name="licencia" value="{{user.licencia}}" maxlength="200">
+										</div>
+
+									</div>
+
+									<div class="form-group">
+										<div class="col-md-12">
+											<label for="address">Dirección</label>
+											<input type="text" class="form-control" name="address" value="{{user.address}}" maxlength="200" val-type="address">
+										</div>
+									</div>
+
+
+									<div class="hr-line-dashed"></div>
+									<div class="form-group">
+										<div class="col-md-12">
+											<div class="pull-right">
+												<a  href="{{content.back}}" class="btn btn-white" type="submit">Regresar</a>
+												<button name="btn-save" class="btn btn-primary" type="submit">Guardar</button>
+											</div>
+										</div>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			{% include(admin ~ '/recursos/footer.twig') %}
+		</div>
+	</div>
+	{% include(admin ~ '/recursos/java.twig') %}
+</body>
+</html>

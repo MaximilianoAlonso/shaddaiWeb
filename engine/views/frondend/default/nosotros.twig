@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>{{internas.extra_internas['meta_titulo']}}</title>
+    <meta name="description" content="{{internas.extra_internas['meta_descripcion']}}" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="{{internas.extra_internas['meta_titulo']}}" />
+    <meta property="og:site_name" content="{{config.facebook_site_name}}" />
+    <meta property="og:image" content="{{config.facebook_banner}}" />
+    <meta property="og:image:secure_url" content="{{config.facebook_banner}}" />
+    <meta property="og:locale" content="{{config.facebook_locale}}" />
+    <meta property="og:description" content="{{internas.extra_internas['meta_descripcion']}}" />
+    <meta property="og:url" content="{{request}}">
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="{{internas.extra_internas['meta_titulo']}}" />
+    <meta name="twitter:description" content="{{internas.extra_internas['meta_descripcion']}}" />
+    <meta name="twitter:image" content="{{config.facebook_banner}}" />
+    <meta name="twitter:domain" content="{{request}}">
+    {% include(recursos ~ '/recursos/recursos.twig') %}
+</head>
+
+<body class="page_nuestra_firma">
+    {% include(recursos ~ '/recursos/header.twig') %}
+    <main>
+        <section class="breadcrumb-area bg-img">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <h2>Nuestra Firma</h2>
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="{{url}}">Inicio</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Nuestra Firma</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="nuestra-firma" class="padding">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <img src="{{theme}}/images/nosotros.png" alt="Shaddai" class="img-fluid w-100">
+                    </div>
+                    <div class="col-md-12">
+                        <h2><img src="{{theme}}/images/decor-3.png" alt="Shaddai">Quiénes Somos</h2>
+                        {{internas.extra_internas['text_quienes_somos'] | raw}}
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="principios" class="padding bg-img">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h2><img src="{{theme}}/images/decor-3.png" alt="Shaddai">Nuestros Principios</h2>
+                        {{internas.extra_internas['text_principios'] | raw}}
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="vmision" class="padding">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 col-xs-12">
+                        <h2><img src="{{theme}}/images/decor-3.png" alt="Shaddai">Nuestra Visión</h2>
+                        <p>{{internas.extra_internas['text_vision'] |raw }}</p>
+                    </div>
+                    <div class="col-md-6 col-xs-12">
+                        <h2><img src="{{theme}}/images/decor-1.png" alt="Shaddai">Nuestra Misión</h2>
+                        <p>{{internas.extra_internas['text_mision'] |raw }}</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="team" class="padding">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h2><img src="{{theme}}/images/decor-3.png" alt="Shaddai">Nuestro Equipo</h2>
+                        <p>{{internas.extra_internas['text_equipo'] }}</p>
+                    </div>
+                    {% set sec_equipo = equipo.data() %}
+                    {% if sec_equipo | length > 0 %}
+                    {% for key, item in sec_equipo %}
+                    <div class="col-md-4 col-xs-6">
+                        <div class="col-team text-center">
+                            <img src="{{item.photo}}" alt="{{item.name}}" class="img-fluid w-100">
+                            <div class="info text-left">
+                                <p>{{item.extra['cargo']}}</p>
+                                <h2>{{item.name}}</h2>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
+        </section>
+    </main>
+    {% include(recursos ~ '/recursos/footer.twig') %}
+    {% include(recursos ~ '/recursos/javascript.twig') %}
+</body>
+
+</html>

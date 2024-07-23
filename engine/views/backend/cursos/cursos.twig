@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="es-PE">
+<head>
+	<meta charset="UTF-8">
+	<title>{{content.title}}  :: {{config.system}}</title>
+	{% include(admin ~ '/recursos/recursos.twig') %}
+</head>
+<body>
+	<div id="wrapper">
+		{% include(admin ~ '/recursos/silebar.twig') %}
+		<div id="page-wrapper" class="gray-bg">
+			{% include(admin ~ '/recursos/header.twig') %}
+			<div class="row wrapper border-bottom white-bg page-heading">
+				<div class="col-lg-8">
+					<h2>{{content.title}}</h2>
+					<ol class="breadcrumb">
+						<li>
+							<a href="{{content.back}}">{{content.sector}}</a>
+						</li>
+						<li class="active">
+							<strong>{{content.cabezado}}</strong>
+						</li>
+					</ol>
+				</div>
+				<div class="col-lg-4">
+				</div>
+			</div>
+			<div class="wrapper wrapper-content">
+				<div class="row">
+					<div class="col-lg-12">
+						{% if args['type'] == 'orden' %}
+						<div class="ibox float-e-margins">
+							<div class="ibox-title">
+								<h5>{{content.title}}</h5>
+							</div>
+							<div class="ibox-content">
+								<form class="form-horizontal " enctype="multipart/form-data" method="post" parsley-validate novalidate>
+									<p>Para ordenar es necesario arrastrar.</p>
+									<div class="form-group">
+										<div class="col-md-6">
+											{% set listado	= cursos.data() %}
+											{% if listado |length > 0  %}
+											<input type="hidden" name="orden" class="form-control" >
+											<div class="dd orden" id="nestable">
+												<ol class="dd-list" >
+													{% for item in listado %}
+													<li class="dd-item " data-id="{{item.id}}">
+														<div class="dd-handle" style="overflow: hidden;">
+															<div class="pull-right">
+																<img src="{{item.photo_small}}" alt="{{item.photo_name}}" style="width: 150px;">
+															</div>
+															<div class="pull-left">
+																{{item.name}}
+															</div>
+														</div>
+													</li>
+													{% endfor %}
+												</ol>
+											</div>
+											{% endif %}
+										</div>
+									</div>
+									<div class="hr-line-dashed"></div>
+									<div class="form-group">
+										<div class="col-md-12">
+											<div class="pull-right">
+												<a  href="{{content.back}}" class="btn btn-white" type="submit">Regresar</a>
+												<button name="btn-save" class="btn btn-primary" type="submit">Guardar</button>
+											</div>
+										</div>
+									</div>
+								</form>
+							</div>
+						</div>
+						{% elseif args['type'] == 'agregar' or args['type'] == 'editar' %}
+
+						<form class="form-horizontal " enctype="multipart/form-data" method="post" parsley-validate novalidate>
+							<div class="tabs-container">
+								<ul class="nav nav-tabs">
+									<li class="active" class=""><a data-toggle="tab" href="#tab-1">Configuración</a></li>
+									<li class=""><a data-toggle="tab" href="#tab-2">Website</a></li>
+									<li class=""><a data-toggle="tab" href="#tab-3">Preguntas Frecuentes</a></li>
+									<li class=""><a data-toggle="tab" href="#tab-4">Pago y Compra</a></li>
+									<li class=""><a data-toggle="tab" href="#tab-5">Metas</a></li>
+								</ul>
+								<div class="tab-content panel-body">
+									<div id="tab-1" class="tab-pane active">
+										<div class="form-group">
+											<div class="col-md-12">
+												<label class="form-label">Portada</label>
+												<span>(Máx. de {{ccursos.portada.size}}px)</span>
+												<div id="view-img">
+													<span class="user_img_big banner_big" style="background-image: url({{cursos.photo_cursos['portada']['file']}})"></span>
+													<input type="hidden" name="photo[portada]" value="{{cursos.photo_cursos['portada']['name']}}" />
+													<span id="sub_img" class="btn btn-default">
+														<span class="fa fa-picture-o "></span>
+														<span>Cambiar foto...</span>
+														<input type="file" id="previmage" name="photo_send[portada]">
+													</span>
+													<span class="user_img_big banner_big prevdemo"></span>
+												</div>
+											</div>
+										</div>
+										<div class="form-group">
+											<div class="col-md-12">
+												<label class="form-label">Principal</label>
+												<span>(Máx. de {{ccursos.principal.size}}px)</span>
+												<div id="view-img">
+													<span class="user_img_big banner_big" style="background-image: url({{cursos.photo_cursos['principal']['file']}})"></span>
+													<input type="hidden" name="photo[principal]" value="{{cursos.photo_cursos['principal']['name']}}" />
+													<span id="sub_img" class="btn btn-default">
+														<span class="fa fa-picture-o "></span>
+														<span>Cambiar foto...</span>
+														<input type="file" id="previmage" name="photo_send[principal]">
+													</span>
+													<span class="user_img_big banner_big prevdemo"></span>
+												</div>
+											</div>
+										</div>
+										{# <div class="form-group">
+											<div class="col-md-12">
+												<label class="form-label"><b>Principal Hover</b></label>
+												<span>(Máx. de {{ccursos.principal.size}}px)</span>
+												<div id="view-img">
+													<span class="user_img_big banner_big" style="background-image: url({{cursos.photo_cursos['principalh']['file']}})"></span>
+													<input type="hidden" name="photo[principalh]" value="{{cursos.photo_cursos['principalh']['name']}}" />
+													<span id="sub_img" class="btn btn-default">
+														<span class="fa fa-picture-o "></span>
+														<span>Cambiar foto...</span>
+														<input type="file" id="previmage" name="photo_send[principalh]">
+													</span>
+													<span class="user_img_big banner_big prevdemo"></span>
+												</div>
+											</div>
+										</div> #}
+										<div class="form-group">
+											<div class="col-md-12">
+												<label class="form-label">Nombre o Descripción</label>
+												<input type="text" name="name_cursos" class="form-control" value="{{cursos.name_cursos}}" val-type="standar" required>
+											</div>
+										</div>
+										<div class="form-group">
+											<div class="col-md-12">
+												<label class="form-label">SEO</label>
+												<input type="text" name="seo_cursos" class="form-control" value="{{cursos.seo_cursos}}"  required>
+											</div>
+										</div>
+										<div class="form-group">
+											<div class="col-md-2">
+												<label class="form-label">Minititulo - Portada</label>
+												<input type="text" name="extra[texto][pminititulo]" class="form-control" value="{{cursos.extra_cursos['texto']['pminititulo'] }}" >
+											</div>
+											<div class="col-md-10">
+												<label class="form-label">Titulo - Portada</label>
+												<input type="text" name="extra[texto][ptitulo]" class="form-control" value="{{cursos.extra_cursos['texto']['ptitulo'] }}" >
+											</div>
+										</div>
+										<div class="form-group">
+											<div class="col-md-12">
+												<label class="form-label">Descripción - Portada</label>
+												<input type="text" name="extra[texto][pdescripcion]" class="form-control" value="{{cursos.extra_cursos['texto']['pdescripcion'] }}" >
+											</div>
+										</div>
+										<div class="form-group">
+											{% if ccursos.view.lineas == 1 %}
+											<div class="col-md-3">
+												<label class="form-label">¿Lineas?</label>
+												<select name="id_lineas" class="form-control">
+													{{cursos_lineas.select(cursos.id_lineas) | raw}}
+												</select>
+											</div>
+											{% endif %}
+											{% if ccursos.view.categorias == 1 %}
+											<div class="col-md-3">
+												<label class="form-label">¿Categorias?</label>
+												<select name="id_categorias" class="form-control">
+													{{cursos_categorias.select(cursos.id_categorias, cursos.id_lineas) | raw}}
+												</select>
+											</div>
+											{% endif %}
+											{% if ccursos.view.subcategorias == 1 %}
+											<div class="col-md-3">
+												<label class="form-label">¿Sub-Categorias?</label>
+												<select name="id_subcategorias" class="form-control">
+													{{cursos_subcategorias.select(cursos.id_subcategorias, cursos.id_categorias) | raw}}
+												</select>
+											</div>
+											{% endif %}
+											<div class="col-md-3">
+												<label class="form-label">¿Activo?</label>
+												<select name="active_cursos" class="form-control">
+													{{functions.displayOption(cursos.active_cursos) | raw}}
+												</select>
+											</div>
+											<div class="col-md-3">
+												<label class="form-label">Theme</label>
+												<select name="extra[theme]" class="form-control">
+													{{functions.theme(cursos.extra_cursos['theme'],  config.frondend ~ '/cursos/') | raw}}
+												</select>
+											</div>
+										</div>
+										{# <div class="hr-line-dashed"></div>
+										<div class="form-group">
+											<div class="col-md-12">
+												<h2>Valoración</h2>
+											</div>
+										</div>
+										<div class="form-group">
+											<div class="col-md-2">
+												<label class="form-label">Número</label>
+												<input type="text" name="extra[valoracion][numero]" class="form-control" value="{{cursos.extra_cursos['valoracion']['numero']}}" val-type="number" required>
+											</div>
+											<div class="col-md-2">
+												<label class="form-label">Contador</label>
+												<input type="text" name="extra[valoracion][cont]" class="form-control" value="{{cursos.extra_cursos['valoracion']['cont']}}" val-type="number" required>
+											</div>
+										</div> #}
+									</div>
+									<div id="tab-2" class="tab-pane">
+										<div class="form-group">
+											<div class="col-md-12">
+												<label class="form-label">Descripción</label>
+												<input type="text" name="extra[texto][pregunta1]" class="form-control" value="{{cursos.extra_cursos['texto']['pregunta1']}}" >
+											</div>
+										</div>
+										<div class="form-group">
+											<div class="col-md-12">
+												<input type="text" name="extra[texto][respuesta1]" class="form-control" value="{{cursos.extra_cursos['texto']['respuesta1']}}" >
+											</div>
+										</div>
+										<div class="form-group">
+											<div class="col-md-12">
+												<label class="form-label">Pregunta 2</label>
+												<input type="text" name="extra[texto][pregunta2]" class="form-control" value="{{cursos.extra_cursos['texto']['pregunta2']}}" >
+											</div>
+										</div>
+										<div class="form-group">
+											<div class="col-md-12">
+												<textarea name="extra[texto][respuesta2]" class="form-control summernote" rows="5" >{{cursos.extra_cursos['texto']['respuesta2']}}</textarea>
+											</div>
+										</div>
+										<div class="form-group">
+											<div class="col-md-12">
+												<label class="form-label">Beneficios</label>
+												<input type="text" name="extra[texto][beneficios1]" class="form-control" value="{{cursos.extra_cursos['texto']['beneficios1']}}" >
+											</div>
+										</div>
+										<div class="form-group">
+											<div class="col-md-12">
+												<textarea name="extra[texto][beneficios2]" class="form-control summernote" rows="5" >{{cursos.extra_cursos['texto']['beneficios2'] }}</textarea>
+											</div>
+										</div>
+										<div class="form-group">
+											<div class="col-md-12">
+												<label class="form-label">Contenido</label>
+												<input type="text" name="extra[texto][cprograma1]" class="form-control" value="{{cursos.extra_cursos['texto']['cprograma1']}}" >
+											</div>
+										</div>
+										<div class="form-group">
+											<div class="col-md-12">
+												<textarea name="extra[texto][cprograma2]" class="form-control summernote" rows="5" >{{cursos.extra_cursos['texto']['cprograma2'] }}</textarea>
+											</div>
+										</div>
+									</div>
+									<div id="tab-3" class="tab-pane">
+										<div class="form-group">
+											<div class="col-md-12">
+												<label class="form-label">Preguntas Frecuentes 1</label>
+												<input type="text" name="extra[texto][pfrecuente1]" class="form-control" value="{{cursos.extra_cursos['texto']['pfrecuente1']}}" >
+											</div>
+										</div>
+										<div class="form-group">
+											<div class="col-md-12">
+												<textarea name="extra[texto][pfrespuesta1]" class="form-control summernote" rows="5">{{cursos.extra_cursos['texto']['pfrespuesta1'] }}</textarea>
+											</div>
+										</div>
+										<div class="form-group">
+											<div class="col-md-12">
+												<label class="form-label">Preguntas Frecuentes 2</label>
+												<input type="text" name="extra[texto][pfrecuente2]" class="form-control" value="{{cursos.extra_cursos['texto']['pfrecuente2']}}" >
+											</div>
+										</div>
+										<div class="form-group">
+											<div class="col-md-12">
+												<textarea name="extra[texto][pfrespuesta2]" class="form-control summernote" rows="5">{{cursos.extra_cursos['texto']['pfrespuesta2'] }}</textarea>
+											</div>
+										</div>
+										<div class="form-group">
+											<div class="col-md-12">
+												<label class="form-label">Preguntas Frecuentes 3</label>
+												<input type="text" name="extra[texto][pfrecuente3]" class="form-control" value="{{cursos.extra_cursos['texto']['pfrecuente3']}}" >
+											</div>
+										</div>
+										<div class="form-group">
+											<div class="col-md-12">
+												<textarea name="extra[texto][pfrespuesta3]" class="form-control summernote" rows="5">{{cursos.extra_cursos['texto']['pfrespuesta3'] }}</textarea>
+											</div>
+										</div>
+										<div class="form-group">
+											<div class="col-md-12">
+												<label class="form-label">Preguntas Frecuentes 4</label>
+												<input type="text" name="extra[texto][pfrecuente4]" class="form-control" value="{{cursos.extra_cursos['texto']['pfrecuente4']}}" >
+											</div>
+										</div>
+										<div class="form-group">
+											<div class="col-md-12">
+												<textarea name="extra[texto][pfrespuesta4]" class="form-control summernote" rows="5">{{cursos.extra_cursos['texto']['pfrespuesta4'] }}</textarea>
+											</div>
+										</div>
+										<div class="form-group">
+											<div class="col-md-12">
+												<label class="form-label">Preguntas Frecuentes 5</label>
+												<input type="text" name="extra[texto][pfrecuente5]" class="form-control" value="{{cursos.extra_cursos['texto']['pfrecuente5']}}" >
+											</div>
+										</div>
+										<div class="form-group">
+											<div class="col-md-12">
+												<textarea name="extra[texto][pfrespuesta5]" class="form-control summernote" rows="5">{{cursos.extra_cursos['texto']['pfrespuesta5'] }}</textarea>
+											</div>
+										</div>
+										<div class="form-group">
+											<div class="col-md-12">
+												<label class="form-label">Preguntas Frecuentes 6</label>
+												<input type="text" name="extra[texto][pfrecuente6]" class="form-control" value="{{cursos.extra_cursos['texto']['pfrecuente6']}}" >
+											</div>
+										</div>
+										<div class="form-group">
+											<div class="col-md-12">
+												<textarea name="extra[texto][pfrespuesta6]" class="form-control summernote" rows="5">{{cursos.extra_cursos['texto']['pfrespuesta6'] }}</textarea>
+											</div>
+										</div>
+										<div class="form-group">
+											<div class="col-md-12">
+												<label class="form-label">Preguntas Frecuentes 7</label>
+												<input type="text" name="extra[texto][pfrecuente7]" class="form-control" value="{{cursos.extra_cursos['texto']['pfrecuente7']}}" >
+											</div>
+										</div>
+										<div class="form-group">
+											<div class="col-md-12">
+												<textarea name="extra[texto][pfrespuesta7]" class="form-control summernote" rows="5">{{cursos.extra_cursos['texto']['pfrespuesta7'] }}</textarea>
+											</div>
+										</div>
+										<div class="form-group">
+											<div class="col-md-12">
+												<label class="form-label">Preguntas Frecuentes 8</label>
+												<input type="text" name="extra[texto][pfrecuente8]" class="form-control" value="{{cursos.extra_cursos['texto']['pfrecuente8']}}" >
+											</div>
+										</div>
+										<div class="form-group">
+											<div class="col-md-12">
+												<textarea name="extra[texto][pfrespuesta8]" class="form-control summernote" rows="5">{{cursos.extra_cursos['texto']['pfrespuesta8'] }}</textarea>
+											</div>
+										</div>
+										<div class="form-group">
+											<div class="col-md-12">
+												<label class="form-label">Preguntas Frecuentes 9</label>
+												<input type="text" name="extra[texto][pfrecuente9]" class="form-control" value="{{cursos.extra_cursos['texto']['pfrecuente9']}}" >
+											</div>
+										</div>
+										<div class="form-group">
+											<div class="col-md-12">
+												<textarea name="extra[texto][pfrespuesta9]" class="form-control summernote" rows="5">{{cursos.extra_cursos['texto']['pfrespuesta9'] }}</textarea>
+											</div>
+										</div>
+										<div class="form-group">
+											<div class="col-md-12">
+												<label class="form-label">Preguntas Frecuentes 10</label>
+												<input type="text" name="extra[texto][pfrecuente10]" class="form-control" value="{{cursos.extra_cursos['texto']['pfrecuente10']}}" >
+											</div>
+										</div>
+										<div class="form-group">
+											<div class="col-md-12">
+												<textarea name="extra[texto][pfrespuesta10]" class="form-control summernote" rows="5">{{cursos.extra_cursos['texto']['pfrespuesta10'] }}</textarea>
+											</div>
+										</div>
+									</div>
+									<div id="tab-4" class="tab-pane">
+										<div class="form-group">
+											<div class="col-md-12">
+												<label class="form-label">Condiciones</label>
+												<input type="text" name="extra[texto][compra1]" class="form-control" value="{{cursos.extra_cursos['texto']['compra1']}}" >
+											</div>
+										</div>
+										<div class="form-group">
+											<div class="col-md-12">
+												<textarea name="extra[texto][compra2]" class="form-control" rows="5" >{{cursos.extra_cursos['texto']['compra2']}}</textarea>
+											</div>
+										</div>
+										<div class="form-group">
+											<div class="col-md-12">
+												<label class="form-label">Pago</label>
+												<input type="text" name="extra[texto][pago1]" class="form-control" value="{{cursos.extra_cursos['texto']['pago1']}}" >
+											</div>
+										</div>
+										<div class="form-group">
+											<div class="col-md-12">
+												<textarea name="extra[texto][pago2]" class="form-control" rows="5" >{{cursos.extra_cursos['texto']['pago2']}}</textarea>
+											</div>
+										</div>
+										<div class="form-group">
+											<div class="col-md-12">
+												<label class="form-label">Transferencia</label>
+												<input type="text" name="extra[texto][transferencia1]" class="form-control" value="{{cursos.extra_cursos['texto']['transferencia1']}}" >
+											</div>
+										</div>
+										<div class="form-group">
+											<div class="col-md-12">
+												<textarea name="extra[texto][transferencia2]" class="form-control summernote" rows="5" >{{cursos.extra_cursos['texto']['transferencia2']}}</textarea>
+											</div>
+										</div>
+										<div class="form-group">
+											<div class="col-md-12">
+												<label class="form-label">Tarjeta</label>
+												<input type="text" name="extra[texto][tarjeta1]" class="form-control" value="{{cursos.extra_cursos['texto']['tarjeta1']}}" >
+											</div>
+										</div>
+										<div class="form-group">
+											<div class="col-md-12">
+												<textarea name="extra[texto][tarjeta2]" class="form-control summernote" rows="5" >{{cursos.extra_cursos['texto']['tarjeta2']}}</textarea>
+											</div>
+										</div>
+									</div>
+									<div id="tab-5" class="tab-pane">
+										<div class="form-group">
+											<div class="col-md-12">
+												<label class="form-label">Titulo</label>
+												<input type="text" name="extra[meta][titulo]" class="form-control" value="{{cursos.extra_cursos['meta']['titulo']}}" required>
+											</div>
+										</div>
+										<div class="form-group">
+											<div class="col-md-6">
+												<label class="form-label">Descripción</label>
+												<textarea name="extra[meta][descripcion]" class="form-control" rows="5" required>{{cursos.extra_cursos['meta']['descripcion'] }}</textarea>
+											</div>
+											<div class="col-md-6">
+												<label class="form-label">Palabras Claves</label>
+												<textarea name="extra[meta][keywords]" class="form-control" rows="5" >{{cursos.extra_cursos['meta']['keywords'] }}</textarea>
+											</div>
+										</div>
+									</div>
+									<div class="hr-line-dashed"></div>
+									<div class="form-group">
+										<div class="col-md-12">
+											<div class="pull-right">
+												<a  href="{{content.back}}" class="btn btn-white" type="submit">Regresar</a>
+												<button name="btn-save" class="btn btn-primary" type="submit">Guardar</button>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</form>
+						{% else %}
+						<div class="ibox float-e-margins">
+							<div class="ibox-title">
+								<h5>{{content.title}}</h5>
+							</div>
+							<div class="ibox-content">
+								<table  id="datatable" class="table table-striped table-bordered dt-responsive nowrap  no-xls orden" >
+									<thead>
+										<tr>
+											<th>Nombre o Descripción</th>
+											{% if ccursos.view.lineas == 1 %}
+											<th width="5%">Lineas</th>
+											{% endif %}
+											{% if ccursos.view.categorias == 1 %}
+											<th width="5%">Categorias</th>
+											{% endif %}
+											{% if ccursos.view.subcategorias == 1 %}
+											<th width="5%">Sub-Categorias</th>
+											{% endif %}
+											<th width="5%">Estatus</th>
+											<th width="5%">Edición</th>
+										</tr>
+									</thead>
+									<tbody>
+									</tbody>
+								</table>
+							</div>
+						</div>
+						{% endif %}
+
+					</div>
+				</div>
+			</div>
+			{% include(admin ~ '/recursos/footer.twig') %}
+		</div>
+	</div>
+	{% include(admin ~ '/recursos/java.twig') %}
+	{% if args['type'] == 'agregar' or args['type'] == 'editar' %}
+	{% include(admin ~ '/cursos/cursos.script.twig') %}
+	{% endif %}
+	{% if args['type'] == 'orden' %}
+	<script src="{{backend}}/plugins/nestable/jquery.nestable.js"></script>
+	<script>
+	$(function(){
+		var updateOutput = function (e) {
+			var list = e.length ? e : $(e.target),
+			output = list.data('output');
+			if (window.JSON) {
+                     output.val(window.JSON.stringify(list.nestable('serialize')));//, null, 2));
+                 } else {
+                 	output.val('JSON browser support required for this demo.');
+                 }
+             };
+             $('#nestable').nestable({
+             	group: 1,
+             	maxDepth: 1
+             }).on('change', updateOutput);
+             updateOutput($('#nestable').data('output', $('[name=orden]')));
+             $('#nestable-menu').on('click', function (e) {
+             	var target = $(e.target),
+             	action = target.data('action');
+             	if (action === 'expand-all') {
+             		$('.dd').nestable('expandAll');
+             	}
+             	if (action === 'collapse-all') {
+             		$('.dd').nestable('collapseAll');
+             	}
+             });
+         });
+	</script>
+	{% endif %}
+</body>
+</html>

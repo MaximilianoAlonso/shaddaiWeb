@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="es-PE">
+<head>
+	<meta charset="UTF-8">
+	<title>{{content.title}}  :: {{config.system}}</title>
+	{% include(admin ~ '/recursos/recursos.twig') %}
+</head>
+<body>
+	<div id="wrapper">
+		{% include(admin ~ '/recursos/silebar.twig') %}
+		<div id="page-wrapper" class="gray-bg">
+			{% include(admin ~ '/recursos/header.twig') %}
+			<div class="row wrapper border-bottom white-bg page-heading">
+				<div class="col-lg-8">
+					<h2>{{content.title}}</h2>
+					<ol class="breadcrumb">
+						<li>
+							{{content.sector2}}
+						</li>
+						<li>
+							<a href="{{content.back}}">{{content.sector}}</a>
+						</li>
+						<li class="active">
+							<strong>{{content.cabezado}}</strong>
+						</li>
+					</ol>
+				</div>
+				<div class="col-lg-4">
+				</div>
+			</div>
+			<div class="wrapper wrapper-content">
+				<div class="row">
+					<div class="col-lg-12">
+						{% if args['type'] == 'agregar' or args['type'] == 'editar' %}
+						<div class="ibox float-e-margins">
+							<div class="ibox-title">
+								<h5>{{content.title}}</h5>
+							</div>
+							<div class="ibox-content">
+								<form class="form-horizontal " enctype="multipart/form-data" method="post" parsley-validate novalidate>
+									<div class="form-group">
+
+										<div class="col-sm-4 col-xs-12">
+											<label for="worker_dni">Trabajador</span></label>
+											<select name="worker_dni" {{dis}} {{req}} >
+												{{trabajadores.select(usuarios.worker_dni) | raw}}
+											</select>
+										</div>
+
+										<div class="col-sm-4 col-xs-12">
+											<label for="username">Usuario</label>
+											<input name="username" type="text" class="form-control" value="{{usuarios.username}}" {{dis}} {{req}} maxlength="30">
+										</div>
+
+										<div class="col-sm-4 col-xs-12">
+											<label for="active">¿Activo?</label>
+											<select name="active">
+												{{functions.displayOption(usuarios.active) | raw}}
+											</select>
+										</div>
+
+									</div>
+
+									<div class="form-group">
+
+										<div class="col-sm-4 col-xs-12">
+											<label for="Nivel">Perfil</label>
+											<select name="userlevel">
+												{{functions.displayNiveles(usuarios.userlevel) | raw}}
+											</select>
+										</div>
+
+										<div class="col-sm-4 col-xs-12">
+											<label for="Password">Contraseña</label>
+											<input name="password" type="password" class="form-control" id="pass" placeholder="6 - 15 caracteres" maxlength="15" {{req}} val-equalto="#pasr" val-rangelength="[6,15]">
+										</div>
+
+										<div class="col-sm-4 col-xs-12">
+											<label for="RePassword">Repetir Contraseña</label>
+											<input name="repassword" type="password" class="form-control" id="pasr" placeholder="6 - 15 caracteres" maxlength="15" {{req}} val-equalto="#pass" val-rangelength="[6,15]">
+										</div>
+
+									</div>
+									{% set show = 'none' %}
+									{% if args['type'] == 'editar' %}
+									{% set show = 'block!important' %}
+									{% endif %}
+
+									<div id="new" style="display: {{show}}">
+										<div class="form-group">
+											<h2>Asociado al trabajador:</h2>
+										</div>
+										<div class="form-group">
+											<div class="col-md-2"> <span class="user_img_big center" style="background-image:url({{usuarios.thumbs}})"></span></div>
+											<div class="col-md-10">
+												<div class="row">
+													<div class="col-md-4"><span>Nombre Completo</span><span class="form-control fullname">{{usuarios.name}} {{usuarios.lastname}}</span></div>
+													<div class="col-md-4 col-sm-6"><span>Email</span><span class="form-control email">{{usuarios.email}}</span></div>
+													<div class="col-md-4 col-sm-6"><span>Area</span><span class="form-control area">{{usuarios.name_area}}</span></div>
+												</div>
+											</div>
+										</div>
+									</div>
+
+
+									<div class="hr-line-dashed"></div>
+									<div class="form-group">
+										<div class="col-md-12">
+											<div class="pull-right">
+												<a  href="{{content.back}}" class="btn btn-white" type="submit">Regresar</a>
+												<button name="btn-save" class="btn btn-primary" type="submit">Guardar</button>
+											</div>
+										</div>
+									</div>
+								</form>
+							</div>
+						</div>
+						{% else %}
+						<div class="ibox float-e-margins">
+							<div class="ibox-title">
+								<h5>{{content.title}}</h5>
+							</div>
+							<div class="ibox-content">
+								<table  id="datatable" class="table table-striped table-bordered dt-responsive nowrap  no-xls" >
+									<thead>
+										<tr>
+											<th width="5%">Rango</th>
+											<th width="5%">Usuarios</th>
+											<th>Nombre y Apellidos</th>
+											<th width="5%">Estatus</th>
+											<th width="5%">Edición</th>
+										</tr>
+									</thead>
+									<tbody>
+									</tbody>
+								</table>
+							</div>
+						</div>
+						{% endif %}
+
+					</div>
+				</div>
+			</div>
+			{% include(admin ~ '/recursos/footer.twig') %}
+		</div>
+	</div>
+	{% include(admin ~ '/recursos/java.twig') %}
+	{% if args['type'] == 'agregar' %}
+	<script>
+		$('select[name=worker_dni]').change(function(){
+			var id = $(this).children('option:selected').val(),
+			form = 'trabajadores';
+			$.ajax({
+				dataType: "json",
+				url: website + "json",
+				type: "POST",
+				data: {
+					form: form,
+					id: id
+				},
+				success: function(data) {
+					if (data.type == 'success') {
+						$('form > #new').slideDown(300, function() {
+							$('input[name=username]').val(data.username).focus().select();
+							$('.user_img_big.center').animate({opacity: 0}, 400, function() {
+								$(this).css({'background-image': 'url('+data.image+')'}).delay(100).animate({opacity: 1});
+							});
+							$('.fullname').text(data.fullname);
+							$('.email').text(data.email);
+							$('.area').text(data.area);
+						});
+					}else{
+						Command: toastr[data.type](data.msje);
+					}
+				},
+				error: function() {
+					var msj = 'Error en Formulario. Intente de nuevo.'
+					Command: toastr["error"](msj);
+				}
+			});
+		});
+	</script>
+	{% endif %}
+</body>
+</html>

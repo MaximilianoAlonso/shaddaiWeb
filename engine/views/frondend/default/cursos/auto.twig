@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>{{cursos.extra_cursos['meta']['titulo'] }}</title>
+    <meta name="description" content="{{cursos.extra_cursos['meta']['descripcion'] }}" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="{{cursos.extra_cursos['meta']['titulo'] }}" />
+    <meta property="og:site_name" content="{{config.facebook_site_name}}" />
+    <meta property="og:image" content="{{cursos.photo_small_cursos}}" />
+    <meta property="og:locale" content="{{config.facebook_locale}}" />
+    <meta property="og:description" content="{{cursos.extra_cursos['meta']['descripcion'] }}" />
+    <meta property="og:url" content="{{request}}">
+    {% include(recursos ~ '/recursos/recursos.twig') %}
+</head>
+
+<body class="detalle-cursos">
+    {% include(recursos ~ '/recursos/header.twig') %}
+    <main>
+        <section id="header-page">
+            <img src="{{cursos.photo_cursos['principal']['file']}}" alt="{{cursos.name_cursos}}">
+            <div class="container">
+                <div class="row justify-content-start">
+                    <div class="col-md-12 col-xs-12">
+                        <div class="col-md-12 col-xs-12 curso-text">
+                            <h2 class="titulo text-left">
+                                <strong>{{cursos.extra_cursos['texto']['pminititulo']}}</strong>
+                                {{cursos.extra_cursos['texto']['ptitulo']}}
+                            </h2>
+                            <button type="button" class="btn btn-primary btn-purple"><i class="fal fa-shopping-cart"></i> Comprar curso</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="descripcion" class="padding">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 col-xs-12">
+                        <h2 class="titulo text-left">{{cursos.extra_cursos['texto']['pregunta1']}}</h2>
+                        <p class="subtitulo text-left">{{cursos.extra_cursos['texto']['respuesta1']}}</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="resultado" class="padding">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 col-xs-12">
+                        <h2 class="titulo text-left">{{cursos.extra_cursos['texto']['pregunta2']}}</h2>
+                        {{cursos.extra_cursos['texto']['respuesta2'] | raw}}
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="beneficios" class="padding">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 col-xs-12">
+                        <h2 class="titulo text-left">{{cursos.extra_cursos['texto']['beneficios1']}}</h2>
+                    </div>
+                </div>
+                <div class="row mt-30  d-flex justify-content-center">
+                    <div class="col-md-7 col-xs-12">
+                        <div class="row">
+                            <div class="col-md-12 col-xs-12 iconos">
+                                {{cursos.extra_cursos['texto']['beneficios2'] | raw}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-5 col-xs-12">
+                        <img src="{{theme}}/images/cursos/beneficios.png" alt="">
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="contenido-progama" class="padding">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 col-xs-12">
+                        <h2 class="titulo text-left">{{cursos.extra_cursos['texto']['cprograma1']}}</h2>
+                    </div>
+                </div>
+                <div class="row mt-30 programa">
+                    <div class="col-programa col-md-12 col-xs-12">
+                        {{cursos.extra_cursos['texto']['cprograma2'] | raw}}
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="preguntas-frecuentes" class="padding">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 col-xs-12">
+                        <h2 class="titulo text-left">Preguntas Frecuentes</h2>
+                    </div>
+                </div>
+                <div class="row mt-30">
+                    <div class="col-md-12 col-xs-12">
+                        <div class="accordion" id="accordionExample">
+                            {% if cursos.extra_cursos['texto']['pfrecuente1'] | trim  != "" and cursos.extra_cursos['texto']['pfrespuesta1'] | trim != "" %}
+                            <div class="card">
+                                <div class="card-header" id="headingOne">
+                                    <h2 class="mb-0">
+                                        <button class="btn btn-link btn-block text-left btn-purple" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                            <i class="fas fa-square-full"></i> {{cursos.extra_cursos['texto']['pfrecuente1']}}
+                                        </button>
+                                    </h2>
+                                </div>
+                                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+                                    <div class="card-body">
+                                        {{cursos.extra_cursos['texto']['pfrespuesta1'] | raw}}
+                                    </div>
+                                </div>
+                            </div>
+                            {% endif %}
+                            {% if cursos.extra_cursos['texto']['pfrecuente2'] | trim  != "" and cursos.extra_cursos['texto']['pfrespuesta2'] | trim != "" %}
+                            <div class="card">
+                                <div class="card-header" id="headingTwo">
+                                    <h2 class="mb-0">
+                                        <button class="btn btn-link btn-block text-left btn-purple collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                            <i class="fas fa-square-full"></i> {{cursos.extra_cursos['texto']['pfrecuente2']}}
+                                        </button>
+                                    </h2>
+                                </div>
+                                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                                    <div class="card-body">
+                                        {{cursos.extra_cursos['texto']['pfrespuesta2'] | raw}}
+                                    </div>
+                                </div>
+                            </div>
+                            {% endif %}
+                            {% if cursos.extra_cursos['texto']['pfrecuente3'] | trim  != "" and cursos.extra_cursos['texto']['pfrespuesta3'] | trim != "" %}
+                            <div class="card">
+                                <div class="card-header" id="headingThree">
+                                    <h2 class="mb-0">
+                                        <button class="btn btn-link btn-block text-left btn-purple collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                            <i class="fas fa-square-full"></i> {{cursos.extra_cursos['texto']['pfrecuente3']}}
+                                        </button>
+                                    </h2>
+                                </div>
+                                <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+                                    <div class="card-body">
+                                        {{cursos.extra_cursos['texto']['pfrespuesta3'] | raw}}
+                                    </div>
+                                </div>
+                            </div>
+                            {% endif %}
+                            {% if cursos.extra_cursos['texto']['pfrecuente4'] | trim  != "" and cursos.extra_cursos['texto']['pfrespuesta4'] | trim != "" %}
+                            <div class="card">
+                                <div class="card-header" id="headingFour">
+                                    <h2 class="mb-0">
+                                        <button class="btn btn-link btn-block text-left btn-purple collapsed" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                                            <i class="fas fa-square-full"></i> {{cursos.extra_cursos['texto']['pfrecuente4']}}
+                                        </button>
+                                    </h2>
+                                </div>
+                                <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
+                                    <div class="card-body">
+                                        {{cursos.extra_cursos['texto']['pfrespuesta4'] | raw}}
+                                    </div>
+                                </div>
+                            </div>
+                            {% endif %}
+                            {% if cursos.extra_cursos['texto']['pfrecuente5'] | trim  != "" and cursos.extra_cursos['texto']['pfrespuesta5'] | trim != "" %}
+                            <div class="card">
+                                <div class="card-header" id="headingFive">
+                                    <h2 class="mb-0">
+                                        <button class="btn btn-link btn-block text-left btn-purple collapsed" type="button" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                                            <i class="fas fa-square-full"></i> {{cursos.extra_cursos['texto']['pfrecuente5']}}
+                                        </button>
+                                    </h2>
+                                </div>
+                                <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordionExample">
+                                    <div class="card-body">
+                                        {{cursos.extra_cursos['texto']['pfrespuesta5'] | raw}}
+                                    </div>
+                                </div>
+                            </div>
+                            {% endif %}
+                            {% if cursos.extra_cursos['texto']['pfrecuente6'] | trim  != "" and cursos.extra_cursos['texto']['pfrespuesta6'] | trim != "" %}
+                            <div class="card">
+                                <div class="card-header" id="headingSix">
+                                    <h2 class="mb-0">
+                                        <button class="btn btn-link btn-block text-left btn-purple collapsed" type="button" data-toggle="collapse" data-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+                                            <i class="fas fa-square-full"></i> {{cursos.extra_cursos['texto']['pfrecuente6']}}
+                                        </button>
+                                    </h2>
+                                </div>
+                                <div id="collapseSix" class="collapse" aria-labelledby="headingSix" data-parent="#accordionExample">
+                                    <div class="card-body">
+                                        {{cursos.extra_cursos['texto']['pfrespuesta6'] | raw}}
+                                    </div>
+                                </div>
+                            </div>
+                            {% endif %}
+                            {% if cursos.extra_cursos['texto']['pfrecuente7'] | trim  != "" and cursos.extra_cursos['texto']['pfrespuesta7'] | trim != "" %}
+                            <div class="card">
+                                <div class="card-header" id="headingSeventh">
+                                    <h2 class="mb-0">
+                                        <button class="btn btn-link btn-block text-left btn-purple collapsed" type="button" data-toggle="collapse" data-target="#collapseSeventh" aria-expanded="false" aria-controls="collapseSeventh">
+                                            <i class="fas fa-square-full"></i> {{cursos.extra_cursos['texto']['pfrecuente7']}}
+                                        </button>
+                                    </h2>
+                                </div>
+                                <div id="collapseSeventh" class="collapse" aria-labelledby="headingSeventh" data-parent="#accordionExample">
+                                    <div class="card-body">
+                                        {{cursos.extra_cursos['texto']['pfrespuesta7'] | raw}}
+                                    </div>
+                                </div>
+                            </div>
+                            {% endif %}
+                            {% if cursos.extra_cursos['texto']['pfrecuente8'] | trim  != "" and cursos.extra_cursos['texto']['pfrespuesta8'] | trim != "" %}
+                            <div class="card">
+                                <div class="card-header" id="headingEighth">
+                                    <h2 class="mb-0">
+                                        <button class="btn btn-link btn-block text-left btn-purple collapsed" type="button" data-toggle="collapse" data-target="#collapseEighth" aria-expanded="false" aria-controls="collapseEighth">
+                                            <i class="fas fa-square-full"></i> {{cursos.extra_cursos['texto']['pfrecuente8']}}
+                                        </button>
+                                    </h2>
+                                </div>
+                                <div id="collapseEighth" class="collapse" aria-labelledby="headingEighth" data-parent="#accordionExample">
+                                    <div class="card-body">
+                                        {{cursos.extra_cursos['texto']['pfrespuesta8'] | raw}}
+                                    </div>
+                                </div>
+                            </div>
+                            {% endif %}
+                            {% if cursos.extra_cursos['texto']['pfrecuente9'] | trim  != "" and cursos.extra_cursos['texto']['pfrespuesta9'] | trim != "" %}
+                            <div class="card">
+                                <div class="card-header" id="headingNineth">
+                                    <h2 class="mb-0">
+                                        <button class="btn btn-link btn-block text-left btn-purple collapsed" type="button" data-toggle="collapse" data-target="#collapseNineth" aria-expanded="false" aria-controls="collapseNineth">
+                                            <i class="fas fa-square-full"></i> {{cursos.extra_cursos['texto']['pfrecuente9']}}
+                                        </button>
+                                    </h2>
+                                </div>
+                                <div id="collapseNineth" class="collapse" aria-labelledby="headingNineth" data-parent="#accordionExample">
+                                    <div class="card-body">
+                                        {{cursos.extra_cursos['texto']['pfrespuesta9'] | raw}}
+                                    </div>
+                                </div>
+                            </div>
+                            {% endif %}
+                            {% if cursos.extra_cursos['texto']['pfrecuente10'] | trim  != "" and cursos.extra_cursos['texto']['pfrespuesta10'] | trim != "" %}
+                            <div class="card">
+                                <div class="card-header" id="headingTenth">
+                                    <h2 class="mb-0">
+                                        <button class="btn btn-link btn-block text-left btn-purple collapsed" type="button" data-toggle="collapse" data-target="#collapseTenth" aria-expanded="false" aria-controls="collapseTenth">
+                                            <i class="fas fa-square-full"></i> {{cursos.extra_cursos['texto']['pfrecuente10']}}
+                                        </button>
+                                    </h2>
+                                </div>
+                                <div id="collapseTenth" class="collapse" aria-labelledby="headingTenth" data-parent="#accordionExample">
+                                    <div class="card-body">
+                                        {{cursos.extra_cursos['texto']['pfrespuesta10'] | raw}}
+                                    </div>
+                                </div>
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="condiciones-compra" class="padding">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 col-xs-12">
+                        <h2 class="titulo text-left">{{cursos.extra_cursos['texto']['compra1']}}</h2>
+                        <p class="subtitulo text-left">{{cursos.extra_cursos['texto']['compra2'] }}</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="formas-pago" class="padding">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 col-xs-12">
+                        <h2 class="titulo text-left">{{cursos.extra_cursos['texto']['pago1']}}</h2>
+                        {{cursos.extra_cursos['texto']['pago2'] | raw}}
+                    </div>
+                </div>
+                <div class="row mt-30 justify-content-center">
+                    <div class="col-md-5 col-xs-12 pago text-center transferencia">
+                        <div class="row">
+                            <div class="col-md-12 col-xs-12">
+                                <h3>{{cursos.extra_cursos['texto']['transferencia1']}}</h3>
+                            </div>
+                            <div class="col-md-12 col-xs-12">
+                                {{cursos.extra_cursos['texto']['transferencia2'] | raw}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-5 col-xs-12 pago text-center tarjeta">
+                        <div class="row">
+                            <div class="col-md-12 col-xs-12">
+                                <h3>{{cursos.extra_cursos['texto']['tarjeta1']}}</h3>
+                            </div>
+                            <div class="col-md-12 col-xs-12">
+                                {{cursos.extra_cursos['texto']['tarjeta2'] | raw}}
+                                <button type="button" class="btn btn-primary btn-purple"><i class="fal fa-shopping-cart"></i> Comprar Ahora</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    {% include(recursos ~ '/recursos/footer.twig') %}
+    {% include(recursos ~ '/recursos/javascript.twig') %}
+</body>
+
+</html>

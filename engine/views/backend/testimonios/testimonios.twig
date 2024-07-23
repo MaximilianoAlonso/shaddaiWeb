@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="es-PE">
+
+<head>
+    <meta charset="UTF-8">
+    <title>{{content.title}} :: {{config.system}}</title>
+    {% include(admin ~ '/recursos/recursos.twig') %}
+    <style type="text/css">
+        .mh100{min-height: 100px;}
+    </style>
+</head>
+
+<body>
+    <div id="wrapper">
+        {% include(admin ~ '/recursos/silebar.twig') %}
+        <div id="page-wrapper" class="gray-bg">
+            {% include(admin ~ '/recursos/header.twig') %}
+            <div class="row wrapper border-bottom white-bg page-heading">
+                <div class="col-lg-8">
+                    <h2>{{content.title}}</h2>
+                    <ol class="breadcrumb">
+                        <li>
+                            <a href="{{content.back}}">{{content.sector}}</a>
+                        </li>
+                        <li class="active">
+                            <strong>{{content.cabezado}}</strong>
+                        </li>
+                    </ol>
+                </div>
+                <div class="col-lg-4">
+                </div>
+            </div>
+            <div class="wrapper wrapper-content">
+                <div class="row">
+                    <div class="col-lg-12">
+                        {% if args['type'] == 'orden' %}
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title">
+                                <h5>{{content.title}}</h5>
+                            </div>
+                            <div class="ibox-content">
+                                <form class="form-horizontal " enctype="multipart/form-data" method="post" parsley-validate novalidate>
+                                    <p>Para ordenar es necesario arrastrar.</p>
+                                    <div class="form-group">
+                                        <div class="col-md-6">
+                                            {% set listado = testimonios.data() %}
+                                            {% if listado |length > 0 %}
+                                            <input type="hidden" name="orden" class="form-control">
+                                            <div class="dd orden" id="nestable">
+                                                <ol class="dd-list">
+                                                    {% for item in listado %}
+                                                    <li class="dd-item " data-id="{{item.id}}">
+                                                        <div class="dd-handle" style="overflow: hidden;">
+                                                            <div class="pull-right">
+                                                                <img src="{{item.photo_small}}" alt="{{item.photo_name}}" style="width: 150px;">
+                                                            </div>
+                                                            <div class="pull-left">
+                                                                {{item.name}}
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                    {% endfor %}
+                                                </ol>
+                                            </div>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                    <div class="hr-line-dashed"></div>
+                                    <div class="form-group">
+                                        <div class="col-md-12">
+                                            <div class="pull-right">
+                                                <a href="{{content.back}}" class="btn btn-white" type="submit">Regresar</a>
+                                                <button name="btn-save" class="btn btn-primary" type="submit">Guardar</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        {% elseif args['type'] == 'agregar' or args['type'] == 'editar' %}
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title">
+                                <h5>{{content.title}}</h5>
+                            </div>
+                            <div class="ibox-content">
+                                <form class="form-horizontal " enctype="multipart/form-data" method="post" parsley-validate novalidate>
+                                    <div class="form-group">
+                                        <div class="col-md-12">
+                                            <label class="form-label">Autor</label>
+                                            <span>(Máx. de {{ctestimonios.autor.size}}px)</span>
+                                            <div id="view-img">
+                                                <span class="user_img_big banner_big" style="background-image: url({{testimonios.photo_testimonios['autor']['file']}})"></span>
+                                                <input type="hidden" name="photo[autor]" value="{{testimonios.photo_testimonios['autor']['name']}}" />
+                                                <span id="sub_img" class="btn btn-default">
+                                                    <span class="fa fa-picture-o "></span>
+                                                    <span>Cambiar foto...</span>
+                                                    <input type="file" id="previmage" name="photo_send[autor]">
+                                                </span>
+                                                <span class="user_img_big banner_big prevdemo"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-md-12">
+                                            <label class="form-label">Portada</label>
+                                            <span>(Máx. de {{ctestimonios.portada.size}}px)</span>
+                                            <div id="view-img">
+                                                <span class="user_img_big banner_big" style="background-image: url({{testimonios.photo_testimonios['portada']['file']}})"></span>
+                                                <input type="hidden" name="photo[portada]" value="{{testimonios.photo_testimonios['portada']['name']}}" />
+                                                <span id="sub_img" class="btn btn-default">
+                                                    <span class="fa fa-picture-o "></span>
+                                                    <span>Cambiar foto...</span>
+                                                    <input type="file" id="previmage" name="photo_send[portada]">
+                                                </span>
+                                                <span class="user_img_big banner_big prevdemo"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-md-9">
+                                            <label class="form-label">Nombre o Descripción</label>
+                                            <input type="text" name="name_testimonios" class="form-control" value="{{testimonios.name_testimonios}}" val-type="standar" required>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label class="form-label">¿Activo?</label>
+                                            <select name="active_testimonios" class="form-control">
+                                                {{functions.displayOption(testimonios.active_testimonios) | raw}}
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-md-12">
+                                            <label class="form-label">Comentario</label>
+                                            <textarea name="extra[texto][comentario]" class="form-control mh100 summernote" required>{{testimonios.extra_testimonios['texto']['comentario'] | raw}}</textarea>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-md-4">
+                                            <label class="form-label">Cargo</label>
+                                            <input type="text" name="extra[texto][cargo]" class="form-control" value="{{testimonios.extra_testimonios['texto']['cargo']}}" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-md-4">
+                                            <label class="form-label">Video - Link</label>
+                                            <input type="text" name="extra[texto][link]" class="form-control" value="{{testimonios.extra_testimonios['texto']['link']}}" val-type="url">
+                                        </div>
+                                    </div>
+                                    <div class="hr-line-dashed"></div>
+                                    <div class="form-group">
+                                        <div class="col-md-12">
+                                            <div class="pull-right">
+                                                <a href="{{content.back}}" class="btn btn-white" type="submit">Regresar</a>
+                                                <button name="btn-save" class="btn btn-primary" type="submit">Guardar</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        {% else %}
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title">
+                                <h5>{{content.title}}</h5>
+                            </div>
+                            <div class="ibox-content">
+                                <table id="datatable" class="table table-striped table-bordered dt-responsive nowrap  no-xls orden">
+                                    <thead>
+                                        <tr>
+                                            <th>Nombre o Descripción</th>
+                                            <th width="5%">Estatus</th>
+                                            <th width="5%">Edición</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            {% include(admin ~ '/recursos/footer.twig') %}
+        </div>
+    </div>
+    {% include(admin ~ '/recursos/java.twig') %}
+    {% if args['type'] == 'orden' %}
+    <script src="{{backend}}/plugins/nestable/jquery.nestable.js"></script>
+    <script>
+    $(function() {
+        var updateOutput = function(e) {
+            var list = e.length ? e : $(e.target),
+                output = list.data('output');
+            if (window.JSON) {
+                output.val(window.JSON.stringify(list.nestable('serialize'))); //, null, 2));
+            } else {
+                output.val('JSON browser support required for this demo.');
+            }
+        };
+        $('#nestable').nestable({
+            group: 1,
+            maxDepth: 1
+        }).on('change', updateOutput);
+        updateOutput($('#nestable').data('output', $('[name=orden]')));
+        $('#nestable-menu').on('click', function(e) {
+            var target = $(e.target),
+                action = target.data('action');
+            if (action === 'expand-all') {
+                $('.dd').nestable('expandAll');
+            }
+            if (action === 'collapse-all') {
+                $('.dd').nestable('collapseAll');
+            }
+        });
+    });
+    </script>
+    {% endif %}
+</body>
+
+</html>

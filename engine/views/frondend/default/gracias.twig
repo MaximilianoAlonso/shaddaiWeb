@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<title>{{internas.extra_internas['meta_titulo']}}</title>
+	<meta name="description" content="{{internas.extra_internas['meta_descripcion']}}" />
+	<meta property="og:type" content="website" />
+	<meta property="og:title" content="{{internas.extra_internas['meta_titulo']}}" />
+	<meta property="og:site_name" content="{{config.facebook_site_name}}" />
+	<meta property="og:image" content="{{config.facebook_banner}}" />
+	<meta property="og:image:secure_url" content="{{config.facebook_banner}}" />
+	<meta property="og:locale" content="{{config.facebook_locale}}" />
+	<meta property="og:description" content="{{internas.extra_internas['meta_descripcion']}}" />
+	<meta property="og:url" content="{{request}}">
+	<meta name="twitter:card" content="summary" />
+	<meta name="twitter:title" content="{{internas.extra_internas['meta_titulo']}}" />
+	<meta name="twitter:description" content="{{internas.extra_internas['meta_descripcion']}}" />
+	<meta name="twitter:image" content="{{config.facebook_banner}}" />
+	<meta name="twitter:domain" content="{{request}}">
+	{% include(recursos ~ '/recursos/recursos.twig') %}
+</head>
+<body>
+	{% include(recursos ~ '/recursos/header.twig') %}
+	<main>
+         <section class="breadcrumb-area bg-img">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <h2></h2>
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="{{url}}">Inicio</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Gracias</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="contacto" class="padding">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 col-xs-12 formulario text-center">
+                        <h2>Gracias por enviar su mensaje!</h2>
+                        <p class="mb-0">Estaremos respondiendo en un período máximo de 24 horas.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+	{% include(recursos ~ '/recursos/footer.twig') %}
+	{% include(recursos ~ '/recursos/javascript.twig') %}
+</body>
+</html>

@@ -1,0 +1,4 @@
+[2020-05-29 23:27:59] my_logger.INFO: Not Found (404): GET /sobremi [] []
+[2020-05-30 00:13:09] my_logger.INFO: Not Found (404): GET /mereces-vivir-en-amor.html [] []
+[2020-05-30 01:29:04] my_logger.INFO: Not Allowed (404): GET /cursos/mereces-vivir-en-amor IP 127.0.0.1 Analytics 5ecf458bebdb6 [] []
+[2020-05-30 13:48:31] my_logger.INFO: Not Found (404): GET /instagram.com [] []

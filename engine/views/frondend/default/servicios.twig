@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>{{internas.extra_internas['meta_titulo']}}</title>
+    <meta name="description" content="{{internas.extra_internas['meta_descripcion']}}" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="{{internas.extra_internas['meta_titulo']}}" />
+    <meta property="og:site_name" content="{{config.facebook_site_name}}" />
+    <meta property="og:image" content="{{config.facebook_banner}}" />
+    <meta property="og:image:secure_url" content="{{config.facebook_banner}}" />
+    <meta property="og:locale" content="{{config.facebook_locale}}" />
+    <meta property="og:description" content="{{internas.extra_internas['meta_descripcion']}}" />
+    <meta property="og:url" content="{{request}}">
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="{{internas.extra_internas['meta_titulo']}}" />
+    <meta name="twitter:description" content="{{internas.extra_internas['meta_descripcion']}}" />
+    <meta name="twitter:image" content="{{config.facebook_banner}}" />
+    <meta name="twitter:domain" content="{{request}}">
+    {% include(recursos ~ '/recursos/recursos.twig') %}
+</head>
+
+<body class="page_services">
+    {% include(recursos ~ '/recursos/header.twig') %}
+    <main>
+        <section class="breadcrumb-area bg-img">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <h2>Nuestros Servicios</h2>
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="{{url}}">Inicio</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Servicios</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </section>
+        {% set sec_Servicios = servicios_categorias.data() %}
+        {% if sec_Servicios | length > 0 %}
+        <section id="services" class="padding">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="title col-12">
+                        <p><img src="{{theme}}/images/decorL.png" alt="Shaddai"><span>Lo que hacemos</span><img src="{{theme}}/images/decorR.png" alt="Shaddai"></p>
+                        <h2>Nuestros Servicios</h2>
+                    </div>
+                    {% for key, item in sec_Servicios %}
+                    <div class="col-service col-md-4 col-sm-6 col-xs-12">
+                        <a href="{{url}}/servicios/categoria/{{item.seo}}">
+                            <div class="item">
+                                <div class="item-image d-flex align-items-center">
+                                    <img src="{{item.photo['portada']['file']}}" alt="{{item.name}}" class="img-fluid">
+                                </div>
+                                <div class="item-text">
+                                    <h2>{{item.name}}</h2>
+                                    <p>{{item.extra['texto']['descripcion_corta']}}</p>
+                                    <span><img src="{{item.photo['icono']['file']}}" alt="{{item.name}}"></span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+        {% else %}
+        {% endif %}
+        <section id="contact" class="padding bg-img">
+            <div class=" container">
+                <div class="row justify-content-center">
+                    <div id="contacto" class="col-info col-md-4 col-xs-12">
+                        <div class="title">
+                            <h2 class="text-left"><span>Contáctanos</span></h2>
+                        </div>
+                        <div class="correos">
+                            <p><i class="fal fa-envelope"></i>Correo</p>
+                            <ul>
+                                {% if config['email'][0] | trim != "" %}
+                                <li>{{config['email'][0]}}</li>
+                                {% endif %}
+                                {% if config['email'][1] | trim != "" %}
+                                <li>{{config['email'][1]}}</li>
+                                {% endif %}
+                            </ul>
+                        </div>
+                        <div class="telefonos">
+                            <p><i class="fal fa-phone"></i>Teléfonos</p>
+                            <ul>
+                                {% if config['telefono'][0] | trim != "" %}
+                                <li>Ofic. {{config['telefono'][0]}}</li>
+                                {% endif %}
+                                {% if config['telefono'][1] | trim != "" %}
+                                <li>Ofic. {{config['telefono'][1]}}</li>
+                                {% endif %}
+                            </ul>
+                        </div>
+                        <div class="direccion">
+                            <p><i class="fal fa-map-marker-alt"></i>Dirección</p>
+                            <ul>
+                                {% if config['direccion'] | trim != "" %}
+                                <li>{{config['direccion'] |raw }}</li>
+                                {% endif %}
+                                {% if config['direccion2'] | trim != "" %}
+                                <li>{{config['direccion2'] |raw }}</li>
+                                {% endif %}
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-8 col-xs-12 text-center">
+                        <form method="post" enctype="multipart/form-data">
+                            <div class="title">
+                                <h2>Solicitar <span>Cotización</span></h2>
+                            </div>
+                            <div class="form-row">
+                                <p class="text-center">{{internas.extra_internas['servicios_cotizacion'] | raw}}</p>
+                                <div class="form-group col-md-6">
+                                    <input type="text" class="form-control" id="name" name="name" placeholder="Nombre" required="">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <input type="text" class="form-control" id="company" name="company" placeholder="Empresa" required="">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <input type="text" class="form-control" id="phone" name="phone" placeholder="Teléfono" required="">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <input type="email" class="form-control" id="email" name="email" placeholder="Correo" required="">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <textarea class="form-control" id="message" name="message" placeholder="Mensaje" rows="10"></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-shaddai">Enviar Mensaje</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    {% include(recursos ~ '/recursos/footer.twig') %}
+    {% include(recursos ~ '/recursos/javascript.twig') %}
+</body>
+
+</html>

@@ -1,0 +1,4 @@
+[2020-05-28 00:08:50] my_logger.INFO: Not Found (404): GET /sobremi.html [] []
+[2020-05-28 00:10:21] my_logger.INFO: Not Found (404): GET /sobremi.html [] []
+[2020-05-28 00:11:16] my_logger.INFO: Not Found (404): GET /sobre-mi [] []
+[2020-05-28 00:11:25] my_logger.INFO: Not Found (404): GET /sobre-mi [] []

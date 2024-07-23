@@ -1,0 +1,51 @@
+<script src="{{backend}}/plugins/fullcalendar/moment.min.js"></script>
+<script src="{{backend}}/js/jquery-2.1.1.js"></script>
+<script src="{{backend}}/js/jquery-ui-1.10.4.min.js"></script>
+<script src="{{backend}}/js/bootstrap.min.js"></script>
+<script src="{{backend}}/plugins/metisMenu/jquery.metisMenu.js"></script>
+<script src="{{backend}}/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+<!-- Data Tables -->
+<script src="{{backend}}/plugins/dataTables/jquery.dataTables.js"></script>
+<script type="text/javascript" language="javascript" src="{{backend}}/plugins/dataTables/dataTables.bootstrap.min.js">
+</script>
+<script type="text/javascript" language="javascript" src="{{backend}}/plugins/dataTables/dataTables.responsive.min.js">
+</script>
+<script type="text/javascript" language="javascript" src="{{backend}}/plugins/dataTables/responsive.bootstrap.min.js">
+</script>
+<script src="{{backend}}/js/datatables.js"></script>
+<script src="{{backend}}/js/inspinia.js"></script>
+<script src="{{backend}}/plugins/pace/pace.min.js"></script>
+<!-- jQuery UI custom -->
+<script src="{{backend}}/js/jquery-ui.custom.min.js"></script>
+
+<script src="{{backend}}/plugins/select2/select2.full.min.js"></script>
+<script src="{{backend}}/plugins/toastr/toastr.min.js"></script>
+<script src="{{backend}}/js/val-parsley.min.js"></script>
+<script src="{{backend}}/plugins/datapicker/bootstrap-datepicker.js"></script>
+<script src="{{backend}}/plugins/datapicker/locales/bootstrap-datepicker.es.js"></script>
+<!-- Tinycon -->
+<script src="{{backend}}/plugins/tinycon/tinycon.min.js"></script>
+<!-- Clock picker -->
+<script src="{{backend}}/plugins/clockpicker/clockpicker.js"></script>
+<!-- Full Calendar -->
+<script src="{{backend}}/plugins/fullcalendar/fullcalendar.min.js"></script>
+<script src="{{backend}}/plugins/fullcalendar/lang/es.js"></script>
+<!-- Date Time Picker -->
+<script src="{{backend}}/plugins/datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+<script src="{{backend}}/plugins/iCheck/icheck.min.js"></script>
+<script src="{{backend}}/js/elfinder.min.js"></script>
+<script src="{{backend}}/js/i18n/elfinder.es.js"></script>
+<script src="{{backend}}/js/bootstrap-tokenfield.js"></script>
+<script src="{{backend}}/plugins/summernote/summernote.min.js"></script>
+<script src="{{backend}}/plugins/summernote/lang/summernote-es-ES.js"></script>
+<script>
+	var admin = "{{url}}/admin";
+	var web = "{{url}}";
+</script>
+<script src="{{backend}}/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.js" type="text/javascript"></script>
+<script src="{{backend}}/js/main.js"></script>
+{% if return_data %}
+<script>
+	Command: toastr["{{return_data.type}}"]("{{return_data.msje}}");
+</script>
+{% endif %}

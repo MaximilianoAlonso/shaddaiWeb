@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>{{servicios.extra_servicios['meta']['titulo'] }}</title>
+    <meta name="description" content="{{servicios.extra_servicios['meta']['descripcion'] }}" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="{{servicios.extra_servicios['meta']['titulo'] }}" />
+    <meta property="og:site_name" content="{{config.facebook_site_name}}" />
+    <meta property="og:image" content="{{servicios.photo_small_servicios}}" />
+    <meta property="og:locale" content="{{config.facebook_locale}}" />
+    <meta property="og:description" content="{{servicios.extra_servicios['meta']['descripcion'] }}" />
+    <meta property="og:url" content="{{request}}">
+    {% include(recursos ~ '/recursos/recursos.twig') %}
+</head>
+
+<body class="page_service_detail">
+    {% include(recursos ~ '/recursos/header.twig') %}
+    <main>
+        <section class="breadcrumb-area bg-img">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <h2>{{servicios.name_servicios}}</h2>
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="{{url}}">Inicio</a></li>
+                            <li class="breadcrumb-item"><a href="{{url}}/servicios">Servicios</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">{{servicios.name_servicios}}</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="services_detail" class="padding">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8 left-sdetail">
+                        <img src="{{servicios.photo_servicios['principalserv']['file']}}" alt="{{servicios.name_servicios}}" class="img-fluid w-100">
+                        <div class="title">
+                            <p><img src="{{theme}}/images/decor-3.png" alt="Shaddai">Descripción</p>
+                            <h3>{{servicios.extra_servicios['texto']['servicio']['descrpcion'] | raw}}</h3>
+                        </div>
+                        <div class="content">
+                            {{servicios.extra_servicios['texto']['servicio']['contenido'] | raw}}
+                        </div>
+                    </div>
+                    <div class="col-md-1"></div>
+                    <div class="col-md-3 right-sdetail">
+                        <div class="other-services">
+                            <div class="title">
+                                <p><img src="{{theme}}/images/decor-3.png" alt="Shaddai">Otros Servicios</p>
+                                {% set sec_servicio = servicios.data() %}
+                                {% if sec_servicio | length > 0 %}
+                                <ul>
+                                    {% for key, item in sec_servicio %}
+                                    {% set active = '' %}
+                                    {% if item.seo == servicios.seo_servicios %}
+                                    {% set active = 'active' %}
+                                    {% endif %}
+                                    <a href="{{url}}/servicios/{{item.seo}}">
+                                        <li class="{{active}}">{{item.name}}</li>
+                                    </a>
+                                    {% endfor %}
+                                </ul>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="contact-services">
+                            <form method="post" enctype="multipart/form-data">
+                                <div class="title">
+                                    <h2>Contáctanos</h2>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-12">
+                                        <input type="text" class="form-control" id="name" name="name" placeholder="Nombre" required="">
+                                    </div>
+                                    <div class="form-group col-md-12">
+                                        <input type="text" class="form-control" id="company" name="company" placeholder="Empresa" required="">
+                                    </div>
+                                    <div class="form-group col-md-12">
+                                        <input type="text" class="form-control" id="phone" name="phone" placeholder="Teléfono" required="">
+                                    </div>
+                                    <div class="form-group col-md-12">
+                                        <input type="email" class="form-control" id="email" name="email" placeholder="Correo" required="">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <textarea class="form-control" id="message" name="message" placeholder="Mensaje" rows="3"></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary btn-shaddai">Enviar Mensaje</button>
+                            </form>
+                        </div>
+                        <div class="help-services">
+                            <div class="title">
+                                <div class="title">
+                                    <h2>Contáctanos</h2>
+                                    <p>{{config['email'][0]}}</p>
+                                    <p>{{config['whatsapp'][0]}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    {% include(recursos ~ '/recursos/footer.twig') %}
+    {% include(recursos ~ '/recursos/javascript.twig') %}
+</body>
+
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<title>{{personalizados.titulo_personalizados}}</title>
+	<meta name="description" content="{{personalizados.descripcion_personalizados }}" />
+	<meta property="og:type" content="website" />
+	<meta property="og:title" content="{{personalizados.titulo_personalizados}}" />
+	<meta property="og:site_name" content="{{config.facebook_site_name}}" />
+	<meta property="og:image" content="{{personalizados.photo_small_personalizados}}" />
+	<meta property="og:locale" content="{{config.facebook_locale}}" />
+	<meta property="og:description" content="{{personalizados.descripcion_personalizados }}" />
+	    <script src="https://kit.fontawesome.com/f9457e77c9.js" crossorigin="anonymous"></script>
+
+	<meta property="og:url" content="{{request}}">
+	{% include(recursos ~ '/recursos/recursos.twig') %}
+</head>
+<body class="services">
+	{% include(recursos ~ '/recursos/header.twig') %}
+	<main>
+
+		<section class="section padding" id="services">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="head">
+							<h2 class="text-center">
+								{{personalizados.name_personalizados}}
+							</h2>
+						</div>
+						<div class="body">
+							{{personalizados.contenidos_personalizados | raw}}
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</main>
+	{% include(recursos ~ '/recursos/footer.twig') %}
+	{% include(recursos ~ '/recursos/javascript.twig') %}
+</body>
+</html>

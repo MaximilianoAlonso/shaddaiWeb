@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<title>{{servicios.extra_servicios['meta']['titulo'] }}</title>
+	<meta name="description" content="{{servicios.extra_servicios['meta']['descripcion'] }}" />
+	<meta property="og:type" content="website" />
+	<meta property="og:title" content="{{servicios.extra_servicios['meta']['titulo'] }}" />
+	<meta property="og:site_name" content="{{config.facebook_site_name}}" />
+	<meta property="og:image" content="{{servicios.photo_small_servicios}}" />
+	<meta property="og:locale" content="{{config.facebook_locale}}" />
+	<meta property="og:description" content="{{servicios.extra_servicios['meta']['descripcion'] }}" />
+	<meta property="og:url" content="{{request}}">
+	{% include(recursos ~ '/recursos/recursos.twig') %}
+</head>
+<body class="services">
+	{% include(recursos ~ '/recursos/header.twig') %}
+	<main>
+		<section id="trabajos" class="section">
+			<div id="carouselTrabajos" class="carousel slide " data-ride="carousel">
+				<div class="carousel-inner">
+					<div class="carousel-item active">
+						<img class="d-block w-100" src="{{servicios.photo_servicios['portada']['file']}}" alt="{{item.photo_name}}">
+						<div class="carousel-caption">
+							<h1>{{servicios.extra_servicios['texto']['titulo']}}</h1>
+							<p>{{servicios.extra_servicios['texto']['corta']}}</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<img src="{{theme}}/images/trabajos.png" alt="" class="base">
+		</div>
+	</section>
+
+	{% set imagenes = servicios_imagenes.data(servicios.id_servicios, true, 4) %}
+	{% if imagenes | length  > 0 %}
+	<section id="gallery" class="section padding-top">
+		<div class="container">
+			<div class="body row">
+
+				{% for item in imagenes %}
+				{% if es_movil > 0 %}
+				<article class="col-lg-3 col-6" data-id="{{item.servicios}}">
+					<a>
+						<div class="img">
+							<img src="{{item.photo_small}}" alt="">
+							<div class="shadow"></div>
+						</div>
+						<div class="text text-center" >
+							<p>Ver Foto</p>
+						</div>
+					</a>
+				</article>
+
+				{% else %}
+
+				<article class="col-lg-3 col-6" data-id="{{item.servicios}}">
+					<a href="{{item.photo}}" data-toggle="lightbox">
+						<div class="img">
+							<img src="{{item.photo_small}}" alt="">
+							<div class="shadow"></div>
+						</div>
+						<div class="text text-center" >
+							<p>Ver Foto</p>
+						</div>
+					</a>
+				</article>
+
+				{% endif %}
+				{% endfor %}
+
+			</div>
+		</div>
+	</section>
+	{% endif %}
+
+	<section class="section padding-top" id="services">
+		<div class="container">
+			<div class="head">
+				<h3 class="text-center">{{servicios.extra_servicios['texto']['frase']}}</h3>
+			</div>
+			<div class="body row">
+				<div class="col-lg-7">
+					<div class="body align-self-start">
+						{{servicios.extra_servicios['texto']['descripcion']['completa'] | raw}}
+					</div>
+				</div>
+				<div class="col-lg-5">
+					<div class="bloque">
+						{{servicios.extra_servicios['texto']['descripcion']['detalles'] | raw}}
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+</main>
+{% include(recursos ~ '/recursos/footer.twig') %}
+{% include(recursos ~ '/recursos/javascript.twig') %}
+</body>
+</html>

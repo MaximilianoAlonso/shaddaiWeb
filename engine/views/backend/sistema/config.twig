@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="es-PE">
+<head>
+	<meta charset="UTF-8">
+	<title>{{content.title}}  :: {{config.system}}</title>
+	{% include(admin ~ '/recursos/recursos.twig') %}
+</head>
+<body>
+	<div id="wrapper">
+		{% include(admin ~ '/recursos/silebar.twig') %}
+		<div id="page-wrapper" class="gray-bg">
+			{% include(admin ~ '/recursos/header.twig') %}
+			<div class="row wrapper border-bottom white-bg page-heading">
+				<div class="col-lg-8">
+					<h2>{{content.title}}</h2>
+					<ol class="breadcrumb">
+						<li>
+							{{content.sector2}}
+						</li>
+						<li class="active">
+							<strong>{{content.cabezado}}</strong>
+						</li>
+					</ol>
+				</div>
+				<div class="col-lg-4">
+				</div>
+			</div>
+			<div class="wrapper wrapper-content">
+				<div class="row">
+					<div class="col-lg-12">
+						<form class="form-horizontal " enctype="multipart/form-data" method="post" parsley-validate novalidate>
+							<div class="tabs-container">
+								<ul class="nav nav-tabs">
+									<li class="active" class=""><a data-toggle="tab" href="#tab-1">Configuraciones</a></li>
+									<li class=""><a data-toggle="tab" href="#tab-2">Facebook</a></li>
+									<li class=""><a data-toggle="tab" href="#tab-3">Redes Sociales</a></li>
+								</ul>
+								<div class="tab-content panel-body">
+									<div id="tab-1" class="tab-pane active">
+										<div class="form-group">
+											<div class="col-md-3">
+												<label class="form-label">Sistema</label>
+												<input type="text" name="config[system]" class="form-control" value="{{config['system']}}"  readonly>
+											</div>
+											<div class="col-md-3">
+												<label class="form-label">Errores</label>
+												<select name="config[displayErrorDetails]">
+													{% if config['displayErrorDetails'] == true %}
+													{% set displayErrorDetails = 1 %}
+													{% else %}
+													{% set displayErrorDetails = 0 %}
+													{% endif %}
+													{{functions.displayOption(displayErrorDetails) | raw}}
+												</select>
+											</div>
+											<div class="col-md-3">
+												<label class="form-label">Theme</label>
+												<select name="config[frondend]">
+													{{functions.theme(config['frondend']) | raw}}
+												</select>
+											</div>
+										</div>
+										<div class="form-group">
+											<div class="col-md-4">
+												<label class="form-label">Copyright</label>
+												<input type="text" name="config[copyright]" class="form-control" value="{{config['copyright']}}" required>
+											</div>
+											<div class="col-md-6">
+												<label class="form-label">Dirección</label>
+												<input type="text" name="config[direccion]" class="form-control" value="{{config['direccion']}}" required>
+											</div>
+											<div class="col-md-2">
+												<label class="form-label" style="color:transparent">Dirección</label>
+												<input type="text" name="config[direccion2]" class="form-control" value="{{config['direccion2']}}" required>
+											</div>
+										</div>
+										<div class="form-group">
+											<div class="col-md-2">
+												<label class="form-label">Email</label>
+												<input type="text" name="config[email][0]" class="form-control" value="{{config['email'][0]}}" val-type="email">
+											</div>
+											<div class="col-md-2">
+												<label class="form-label">Email</label>
+												<input type="text" name="config[email][1]" class="form-control" value="{{config['email'][1]}}" val-type="email">
+											</div>
+											<div class="col-md-2">
+												<label class="form-label">Whatsapp Link</label>
+												<input type="text" name="config[whatsapp][0]" class="form-control" value="{{config['whatsapp'][0]}}" >
+											</div>
+											<div class="col-md-2">
+												<label class="form-label">Horario de Atención</label>
+												<input type="text" name="config[horario]" class="form-control" value="{{config['horario']}}" >
+											</div>
+											<div class="col-md-2">
+												<label class="form-label">Telefono 1</label>
+												<input type="text" name="config[telefono][0]" class="form-control" value="{{config['telefono'][0]}}" >
+											</div>
+											<div class="col-md-2">
+												<label class="form-label">Telefono 2</label>
+												<input type="text" name="config[telefono][1]" class="form-control" value="{{config['telefono'][1]}}" >
+											</div>
+
+										</div>
+
+									</div>
+									<div id="tab-2" class="tab-pane">
+										<div class="form-group">
+											<div class="col-md-4">
+												<label class="form-label">Locale </label>
+												<input type="text" name="config[facebook_locale]" class="form-control" value="{{config['facebook_locale']}}">
+											</div>
+											<div class="col-md-4">
+												<label class="form-label">Site Name </label>
+												<input type="text" name="config[facebook_site_name]" class="form-control" value="{{config['facebook_site_name']}}">
+											</div>
+										</div>
+									</div>
+									<div id="tab-3" class="tab-pane">
+										<div class="form-group">
+											<div class="col-md-3">
+												<label class="form-label">Facebook</label>
+												<input type="text" name="config[social][facebook]" class="form-control" value="{{config['social']['facebook']}}" val-type="url">
+											</div>
+											<div class="col-md-3">
+												<label class="form-label">Linkedin</label>
+												<input type="text" name="config[social][linkedin]" class="form-control" value="{{config['social']['linkedin']}}" val-type="url">
+											</div>
+											<div class="col-md-3">
+												<label class="form-label">Youtube</label>
+												<input type="text" name="config[social][youtube]" class="form-control" value="{{config['social']['youtube']}}" val-type="url">
+											</div>
+											<div class="col-md-3">
+												<label class="form-label">Instagram</label>
+												<input type="text" name="config[social][instagram]" class="form-control" value="{{config['social']['instagram']}}" val-type="url">
+											</div>
+										</div>
+										{# <div class="form-group">
+											<div class="col-md-4">
+												<label class="form-label">Twitter</label>
+												<input type="text" name="config[social][twitter]" class="form-control" value="{{config['social']['twitter']}}" val-type="url">
+											</div>
+											<div class="col-md-4">
+												<label class="form-label">Instagram</label>
+												<input type="text" name="config[social][instagram]" class="form-control" value="{{config['social']['instagram']}}" val-type="url">
+											</div>
+											<div class="col-md-4">
+												<label class="form-label">Pinterest</label>
+												<input type="text" name="config[social][pinterest]" class="form-control" value="{{config['social']['pinterest']}}" val-type="url">
+											</div>
+										</div>
+										<div class="form-group">
+											<div class="col-md-4">
+												<label class="form-label">Pinterest</label>
+												<input type="text" name="config[social][pinterest]" class="form-control" value="{{config['social']['pinterest']}}" val-type="url">
+											</div>
+											<div class="col-md-4">
+												<label class="form-label">Google</label>
+												<input type="text" name="config[social][google]" class="form-control" value="{{config['social']['google']}}" val-type="url">
+											</div>
+											<div class="col-md-4">
+												<label class="form-label">Behance</label>
+												<input type="text" name="config[social][behance]" class="form-control" value="{{config['social']['behance']}}" val-type="url">
+											</div>
+										</div> #}
+									</div>
+									<div class="hr-line-dashed"></div>
+									<div class="form-group">
+										<div class="col-md-12">
+											<div class="pull-right">
+												<a  href="{{content.back}}" class="btn btn-white" type="submit">Regresar</a>
+												<button name="btn-save" class="btn btn-primary" type="submit">Guardar</button>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</form>
+
+					</div>
+				</div>
+			</div>
+			{% include(admin ~ '/recursos/footer.twig') %}
+		</div>
+	</div>
+	{% include(admin ~ '/recursos/java.twig') %}
+</body>
+</html>

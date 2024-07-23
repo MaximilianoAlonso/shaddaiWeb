@@ -1,0 +1,88 @@
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-sm-6 col-xs-6">
+                <div class="bloque">
+                    <div class="head">
+                        <h4><img src="{{theme}}/images/decor-3.png" alt="shaddai">Servicios</h4>
+                    </div>
+                    {% set sec_Servicios = servicios_categorias.data() %}
+                    {% if sec_Servicios | length > 0 %}
+                    <div class="body">
+                        <ul>
+                            {% for key, item in sec_Servicios %}
+                            <li><a href="{{url}}/servicios/categoria/{{item.seo}}">{{item.name}}</a></li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    {% else %}
+                    {% endif %}
+                </div>
+            </div>
+            <div class="col-lg-4 col-sm-6 col-xs-6">
+                <div class="bloque">
+                    <div class="head">
+                        <h4><img src="{{theme}}/images/decor-3.png" alt="shaddai">Contacto</h4>
+                    </div>
+                    <div class="body">
+                        <ul>
+                            {% if config['direccion'] | trim != "" %}
+                            <li><i class="far fa-map-marker-alt"></i> {{config['direccion'] |raw }} - {{config['direccion2'] |raw }}</li>
+                            {% endif %}
+                            {% if config['email'][0] | trim != "" %}
+                            <li><i class="fal fa-envelope"></i> {{config['email'][0] |raw }}</li>
+                            {% endif %}
+                            {% if config['telefono'][0] | trim != "" %}
+                            <li><i class="fal fa-phone"></i> {{config['telefono'][0]}}</li>
+                            {% endif %}
+                            {% if config['whatsapp'][0] | trim != "" %}
+                            <li><a href="https://wa.me/51{{config['whatsapp'][0] |raw }}"><i class="fab fa-whatsapp"></i> {{config['telefono'][1]}}</a></li>
+                            {% endif %}
+                            {% if config['horario'] | trim != "" %}
+                            <li><i class="fal fa-business-time"></i> {{config['horario'] |raw }}</li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-6 col-xs-6">
+                <div class="bloque">
+                    <div class="head">
+                        <h4><img src="{{theme}}/images/decor-3.png" alt="shaddai">Redes Sociales</h4>
+                    </div>
+                    <div class="body">
+                        <ul class="rsocial">
+                            {% if config['social']['facebook'] | trim != "" %}
+                            <li><a href="{{config['social']['facebook']}}" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
+                            {% endif %}
+                            {% if config['social']['linkedin'] | trim != "" %}
+                            <li><a href="{{config['social']['linkedin']}}" target="_blank"><i class="fab fa-linkedin-in"></i></a></li>
+                            {% endif %}
+                            {% if config['social']['youtube'] | trim != "" %}
+                            <li><a href="{{config['social']['youtube']}}" target="_blank"><i class="fab fa-youtube"></i></a></li>
+                            {% endif %}
+                            {% if config['social']['instagram'] | trim != "" %}
+                            <li><a href="{{config['social']['instagram']}}" target="_blank"><i class="fab fa-instagram"></i></a></li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<div id="copyright">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <p><i class="far fa-copyright"></i> {{config['copyright']}}</p>
+            </div>
+        </div>
+    </div>
+</div>
+ <div class="whatsapp">
+    <a href="https://wa.me/51990208144?text=Hola%20Que tál!" class="whatsapp" target="_blank"> <i class="fa fa-whatsapp whatsapp-icon"></i></a>
+    
+  </div>
+     <script src="https://kit.fontawesome.com/f9457e77c9.js" crossorigin="anonymous"></script>
+ 

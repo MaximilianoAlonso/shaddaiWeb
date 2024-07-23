@@ -1,0 +1,2 @@
+[2020-05-31 08:41:32] my_logger.INFO: Not Allowed (404): GET /blog/%7Burl%7D%7D/blog/como-saber-que-tu-pareja-te-ama IP 127.0.0.1 Analytics 5ecf458bebdb6 [] []
+[2020-05-31 12:18:51] my_logger.INFO: Not Allowed (404): GET /admin/blog/editar/sounds/rm.wav IP 127.0.0.1 Analytics 5ecf458bebdb6 [] []

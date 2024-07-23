@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es-PE">
+
+<head>
+    <meta charset="UTF-8">
+    <title>{{content.title}} :: {{config.system}}</title>
+    {% include(admin ~ '/recursos/recursos.twig') %}
+</head>
+
+<body>
+    <div id="wrapper">
+        {% include(admin ~ '/recursos/silebar.twig') %}
+        <div id="page-wrapper" class="gray-bg">
+            {% include(admin ~ '/recursos/header.twig') %}
+            <div class="row wrapper border-bottom white-bg page-heading">
+                <div class="col-lg-8">
+                    <h2>{{content.title}}</h2>
+                    <ol class="breadcrumb">
+                        <li>
+                            <a href="{{content.back}}">{{content.sector}}</a>
+                        </li>
+                        <li class="active">
+                            <strong>{{content.cabezado}}</strong>
+                        </li>
+                    </ol>
+                </div>
+                <div class="col-lg-4">
+                </div>
+            </div>
+            <div class="wrapper wrapper-content">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <form class="form-horizontal " enctype="multipart/form-data" method="post" parsley-validate novalidate>
+                            <div class="tabs-container">
+                                <ul class="nav nav-tabs">
+                                    <li class="active" class=""><a data-toggle="tab" href="#tab-1">Home</a></li>
+                                    <li class=""><a data-toggle="tab" href="#tab-2">Metas</a></li>
+                                </ul>
+                                <div class="tab-content panel-body">
+                                    <div id="tab-1" class="tab-pane active">
+                                        <div class="form-group">
+                                            <div class="col-md-12">
+                                                <h3>Servicios</h3>
+                                                <input type="text" name="extra_internas[home_servicios]" class="form-control" value="{{internas.extra_internas['home_servicios']}}">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-md-12">
+                                                <h3>Mensaje</h3>
+                                                <input type="text" name="extra_internas[home_mensaje]" class="form-control" value="{{internas.extra_internas['home_mensaje']}}">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-md-12">
+                                                <h3>Porque Elegirnos</h3>
+                                                <textarea type="text" name="extra_internas[home_elegirnos]" class="form-control summernote">{{internas.extra_internas['home_elegirnos']}}</textarea>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-md-12">
+                                                <h3>Clientes</h3>
+                                                <input type="text" name="extra_internas[home_clientes]" class="form-control" value="{{internas.extra_internas['home_clientes']}}">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-md-12">
+                                                <h3>Cotización</h3>
+                                                <input type="text" name="extra_internas[home_cotizacion]" class="form-control" value="{{internas.extra_internas['home_cotizacion']}}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="tab-2" class="tab-pane">
+                                        <div class="form-group">
+                                            <div class="col-md-12">
+                                                <label class="form-label">Titulo</label>
+                                                <input type="text" name="extra_internas[meta_titulo]" class="form-control" value="{{internas.extra_internas['meta_titulo']}}" required>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-md-6">
+                                                <label class="form-label">Descripción</label>
+                                                <textarea name="extra_internas[meta_descripcion]" class="form-control" rows="5" required>{{internas.extra_internas['meta_descripcion']}}</textarea>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label class="form-label">Palabras Claves</label>
+                                                <textarea name="extra_internas[meta_keywords]" class="form-control" rows="5">{{internas.extra_internas['meta_keywords']}}</textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="hr-line-dashed"></div>
+                                    <div class="form-group">
+                                        <div class="col-md-12">
+                                            <div class="pull-right">
+                                                <a href="{{content.back}}" class="btn btn-white" type="submit">Regresar</a>
+                                                <button name="btn-save" class="btn btn-primary" type="submit">Guardar</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            {% include(admin ~ '/recursos/footer.twig') %}
+        </div>
+    </div>
+    {% include(admin ~ '/recursos/java.twig') %}
+</body>
+
+</html>

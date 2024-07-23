@@ -1,0 +1,30 @@
+{% if not white %}
+{% set border_bottom = 'border-bottom' %}
+{% endif %}
+<div class="row {{border_bottom}}">
+	<nav class="navbar navbar-static-top {{white}}" role="navigation" >
+		<div class="navbar-header">
+			<a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
+			<div class="navbar-form-custom search-form" style="opacity: 0.3">
+				<div class="form-group">
+					<input type="text" placeholder="Buscar..." class="form-control" name="top-search" id="top-search" readonly>
+				</div>
+			</div>
+		</div>
+		<ul class="nav navbar-top-links navbar-right">
+			<li class="dropdown">
+
+				<ul class="dropdown-menu dropdown-messages">
+					<li>
+						<div class="text-center link-block">
+							<i class="fa fa-users"></i> <strong>No hay usuarios conectados</strong>
+						</div>
+					</li>
+				</ul>
+			</li>
+			<li><a href="{{url}}/admin/perfil"><i class="fa fa-user"></i> Perfil</a></li>
+			<li><a href="{{url}}/admin/salir"><i class="fa fa-sign-out"></i> Salir</a></li>
+		</ul>
+	</nav>
+</div>
+<div id="alerta"></div>

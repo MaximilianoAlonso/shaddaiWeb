@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="es-PE">
+<head>
+	<meta charset="UTF-8">
+	<title>Bienvenido {{user.name}} {{user.lastname}}  :: {{config.system}}</title>
+	{% include(admin ~ '/recursos/recursos.twig') %}
+</head>
+<body>
+	<div id="wrapper">
+		{% include(admin ~ '/recursos/silebar.twig') %}
+		<div id="page-wrapper" class="gray-bg">
+			{% include(admin ~ '/recursos/header.twig') %}
+			<div class="wrapper wrapper-content">
+				<div class="row">
+					<div class="col-lg-12">
+						<h1 class="page-header" style="margin-top: 0;">Bienvenido {{user.name}} {{user.lastname}}</h1>
+					</div>
+				</div>
+			</div>
+			{% include(admin ~ '/recursos/footer.twig') %}
+		</div>
+	</div>
+	{% include(admin ~ '/recursos/java.twig') %}
+</body>
+</html>
